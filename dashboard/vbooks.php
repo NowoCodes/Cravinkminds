@@ -9,16 +9,6 @@ if (isset($_SESSION['cravinkuname'])) {
   header("Location:../login.php");
 }
 
-$sam = "SELECT * FROM register where username='$cravinkuname'";
-$rsam = mysqli_query($conn, $sam);
-$gsam = mysqli_fetch_assoc($rsam);
-
-$primg = $gsam['primg'];
-$name = $gsam['name'];
-$uname = $gsam['username'];
-$email = $gsam['email'];
-$address = $gsam['address'];
-$phone = $gsam['phone'];
 
 function getAll($conn){
   $query = "SELECT * from books ORDER BY book_isbn DESC";
@@ -60,7 +50,7 @@ include 'dashboard-nav.php' ?>
               <td><?= $row['book_title']; ?></td>
               <td><?= $row['book_author']; ?></td>
               <td><?= $row['book_image']; ?></td>
-              <td><?= $row['book_descr']; ?></td>
+              <td class="text-justify"><?= $row['book_descr']; ?></td>
               <td><?= $row['book_price']; ?></td>
               <td><a href="admin_edit.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
               <a href="admin_delete.php?bookisbn=<?= $row['book_isbn']; ?>">Delete</a></td>
