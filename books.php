@@ -22,7 +22,7 @@ if (!$result) {
         <?php while($query_row = mysqli_fetch_assoc($result)): ?>
           <div class="col-md-3">
             <a href="book.php?bookisbn=<?= $query_row['book_isbn']; ?>">
-              <img class="img-responsive img-thumbnail" src="./bootstrap/img/<?=$query_row['book_image']; ?>">
+              <img class="img-responsive img-thumbnail" src="./image/<?=$query_row['book_image']; ?>">
             </a>
             <p><?= $query_row['book_title']; ?></p>
           </div>
