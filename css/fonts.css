@@ -1,0 +1,17 @@
+@font-face{
+	font-family: futura;
+	font-weight: lighter;
+	src: url('../fonts/futura.ttf');	
+}
+
+@font-face{
+	font-family: basker;
+	src: url('../fonts/basker.ttf') format('truetype');	
+	font-weight: lighter;
+}
+
+@font-face{
+	font-family: playfair;
+	src: url('../fonts/playfair.ttf');	
+	font-weight: lighter;
+}
