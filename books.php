@@ -16,25 +16,24 @@ if (!$result) {
 <h1 class="container-fluid p-4 text-center text-white " style="background: #053a42;">COMMUNITY BOOKS</h1>
 <div class="container mb-5 mt-3">
 
-<p class="lead text-center text-muted">Full Catalogs of Books</p>
-    <?php for($i = 0; $i < mysqli_num_rows($result); $i++): ?>
-      <div class="row">
-        <?php while($query_row = mysqli_fetch_assoc($result)): ?>
-          <div class="col-md-3">
-            <a href="book.php?bookisbn=<?= $query_row['book_isbn']; ?>">
-              <img class="img-responsive img-thumbnail" src="./image/<?=$query_row['book_image']; ?>">
-            </a>
-            <p><?= $query_row['book_title']; ?></p>
-          </div>
-        <?php
-          $count++;
-          if($count >= 4){
-              $count = 0;
-              break;
-            }
-          endwhile; ?> 
-      </div>
-<?php endfor; ?>
+  <?php for ($i = 0; $i < mysqli_num_rows($result); $i++) : ?>
+    <div class="row">
+      <?php while ($query_row = mysqli_fetch_assoc($result)) : ?>
+        <div class="col-md-3">
+          <a href="book.php?bookisbn=<?= $query_row['book_isbn']; ?>">
+            <img class="img-responsive img-thumbnail" src="./img/books/<?= $query_row['book_image']; ?>">
+          </a>
+          <p><?= $query_row['book_title']; ?></p>
+        </div>
+      <?php
+        $count++;
+        if ($count >= 4) {
+          $count = 0;
+          break;
+        }
+      endwhile; ?>
+    </div>
+  <?php endfor; ?>
 
 
 
