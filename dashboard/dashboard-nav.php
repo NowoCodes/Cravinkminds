@@ -73,6 +73,10 @@
   <?php if ($page == 'npost') { ?><li class="nav-item"><a href="npost.php" class="nav-link active">Create Post</a></li>
   <?php } else { ?><li><a href="npost.php" class="nav-link ">Create Post</a></li><?php } ?>
 
+  <?php if ($page == 'viewbooks') { ?><li class="nav-item"><a href="viewbooks.php" class="nav-link active">View Books</a></li>
+  <?php } else { ?><li><a href="viewbooks.php" class="nav-link ">View Books</a></li><?php } ?>
+
+
 <?php if ($page == 'news') { ?><li class="nav-item"><a href="../news.php" class="nav-link active">News</a></li>
   <?php } else { ?><li><a href="../news.php" class="nav-link ">News</a></li><?php } ?>
 
