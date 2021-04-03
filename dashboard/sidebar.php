@@ -90,7 +90,7 @@ span.onclick = function() {
 
 
 <div class="editdetails " style="position: fixed; padding-top: 10%; z-index: 1;">
-    <div style="" class="white">
+    <div class="white">
     <form>
       <p style="text-align: center; font-family: futura; font-weight: bold; margin-bottom: 0px;">EDIT DETAILS </p>
       <p class="pet desc">Full Name:</p>
@@ -112,8 +112,8 @@ span.onclick = function() {
       <input type="text" class="country" value=<?php echo "'$country'"; ?>>
 
       <p style="text-align: center; box-sizing: border-box; height: 40px; padding-top: 5px;">
-        <span style="" class="hover btn p-1 cancel">CANCEL</span>
-        <span style="" class="hover btn p-1 submit">SUBMIT</span>
+        <span class="hover btn p-1 cancel">CANCEL</span>
+        <span class="hover btn p-1 submit">SUBMIT</span>
       </p>  
     </form> 
     </div>
