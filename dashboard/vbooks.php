@@ -1,7 +1,7 @@
 <?php
 $title = 'View Book';
-$page = 'books';
-// session_start();
+$page = 'vbooks';
+session_start();
 // include '../engine/conn.php';
 // if (isset($_SESSION['cravinkuname'])) {
 // 	$cravinkuname=$_SESSION['cravinkuname'];	
@@ -14,12 +14,12 @@ $page = 'books';
 // $rsam = mysqli_query($conn, $sam);
 // $gsam = mysqli_fetch_assoc($rsam);
 
-// $primg = $gsam['primg'];
-// $name = $gsam['name'];
-// $uname = $gsam['username'];
-// $email = $gsam['email'];
-// $address = $gsam['address'];
-// $phone = $gsam['phone'];
+$primg = $gsam['primg'];
+$name = $gsam['name'];
+$uname = $gsam['username'];
+$email = $gsam['email'];
+$address = $gsam['address'];
+$phone = $gsam['phone'];
 
 
 include 'dashboard-nav.php' ?>
