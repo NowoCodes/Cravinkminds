@@ -25,7 +25,7 @@ include 'dashboard-nav.php' ?>
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-1 px-4">
-  <a href="" class="mb-2">Add new book</a>
+  <a href="add_book.php" class="mb-2 btn btn-success">Add new book</a>
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
 
