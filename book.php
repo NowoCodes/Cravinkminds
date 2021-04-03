@@ -23,7 +23,7 @@ if (!$row) {
 <p class="lead ml-4 mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
 <div class="row">
   <div class="col-md-3 text-center">
-    <img class="img-responsive img-thumbnail" src="./image/<?= $row['book_image']; ?>">
+    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>"> 
   </div>
   <div class="col-md-6">
     <h4>Book Description</h4>
@@ -31,7 +31,7 @@ if (!$row) {
     <h4>Book Details</h4>
     <table class="table">
       <?php foreach ($row as $key => $value) {
-        if ($key == "book_descr" || $key == "book_image" || $key == "publisherid" || $key == "book_title") {
+        if ($key == "book_descr" || $key == "book_image" || $key == "book_title") {
           continue;
         }
         switch ($key) {
@@ -60,14 +60,13 @@ if (!$row) {
       }
       ?>
     </table>
-    <form method="post" action="cart.php">
+    <!-- <form method="post" action="cart.php">
       <input type="hidden" name="bookisbn" value="<?= $book_isbn; ?>">
-      <input type="submit" value="Purchase / Add to cart" name="cart" class="btn btn-success mb-4">
-    </form>
+      <input type="submit" value="Purchase" name="purchase" class="btn btn-success mb-4">
+    </form> -->
+    <a role="button" target="_blank" href="https://paystack.com/pay/cravinkmindsbook" class="btn btn-success mb-4 text-decoration-none">Purchase</a>
   </div>
 </div>
-
-
 
 
 </div>
