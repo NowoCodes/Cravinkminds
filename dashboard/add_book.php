@@ -29,118 +29,76 @@ if (isset($_POST['add'])) {
   // add image
   if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
     $image = $_FILES['image']['name'];
-    $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-    $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "img/books/";
-    $uploadDirectory .= $image;
-    move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
+    $img = $_FILES['image']['tmp_name'];
+    $target_dir = "../img/books/";
+    $target_file = $target_dir . basename($image);
+    move_uploaded_file($img, $target_file);
+    // $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+    // $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "img/books/";
+    // $uploadDirectory .= $image;
+    // move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
   }
+  // if (isset($_FILES['file']) && $_FILES['file']['name'] != "") {
+  //   $image = $_FILES['file']['name'];
+  //   $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+  //   $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "img/books/";
+  //   $uploadDirectory .= $image;
+  //   move_uploaded_file($_FILES['file']['tmp_name'], $uploadDirectory);
+  // }
 
-  $query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "')";
+  $q = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price) 
+        VALUES ('$isbn', '$title', '$author', '$image', '$descr', '$price')";
+
+  // $query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "')";
   $result = mysqli_query($conn, $query);
   if (!$result) {
     echo "Can't add new data " . mysqli_error($conn);
     exit;
   } else {
-    header("Location: vbooks.php");
+    header("Location: viewbooks.php");
   }
 }
 ?>
-<form method="post" action="add_book.php" enctype="multipart/form-data">
-  <table class="table">
-    <tr>
-      <th>ISBN</th>
-      <td><input type="text" name="isbn"></td>
-    </tr>
-    <tr>
-      <th>Title</th>
-      <td><input type="text" name="title" required></td>
-    </tr>
-    <tr>
-      <th>Author</th>
-      <td><input type="text" name="author" required></td>
-    </tr>
-    <tr>
-      <th>Image</th>
-      <td><input type="file" name="image"></td>
-    </tr>
-    <tr>
-      <th>Description</th>
-      <td><textarea name="descr" cols="40" rows="5"></textarea></td>
-    </tr>
-    <tr>
-      <th>Price</th>
-      <td><input type="text" name="price" required></td>
-    </tr>
-  </table>
-  <input type="submit" name="add" value="Add new book" class="btn btn-primary">
-  <input type="reset" value="cancel" class="btn btn-default">
-</form>
-<br />
+
+<main role="main" class="col-md-qw ml-sm-auto col-lg-10 pt-1 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+
+    <form method="post" action="add_book.php" enctype="multipart/form-data">
+      <h1 class="display-1">Add Book</h1>
+
+      <table class="table">
+        <tr>
+          <th>ISBN</th>
+          <td><input type="text" name="isbn"></td>
+        </tr>
+        <tr>
+          <th>Title</th>
+          <td><input type="text" name="title" required></td>
+        </tr>
+        <tr>
+          <th>Author</th>
+          <td><input type="text" name="author" required></td>
+        </tr>
+        <tr>
+          <th>Image</th>
+          <td><input type="file" name="image"></td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td><textarea name="descr" cols="40" rows="5"></textarea></td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td><input type="text" name="price" required></td>
+        </tr>
+      </table>
+      <input type="submit" name="add" value="Add new book" class="btn btn-success">
+      <input type="reset" value="cancel" class="btn btn-default">
+    </form>
+    <br />
+  </div>
+</main>
 
 </body>
 
 </html>
-
-
-
-
-<?php
-	include'../engine/conn.php';
-	session_start();
-	if (isset($_SESSION['cravinkuname'])) {
-		if (isset($_POST['post'])&&isset($_POST['uname']) &&isset($_POST['title'])&&isset($_FILES['file'])) {
-			$uname=$_POST['uname'];
-			$post=$_POST['post'];
-			$head=$_POST['title'];
-			$post=str_replace("'","''",$post);
-			$imgf=$_FILES['file']['name'];
-			$img=$_FILES['file']['tmp_name'];
-			$imgname=$uname.$imgf;
-			$tt=time();
-
-			$del="INSERT into posts (head,post,uploader,img,`time`)values('$head','$post','$uname','$imgname','$tt')";
-
-			$rdel=mysqli_query($conn,$del);
-			if ($rdel) {
-				if(move_uploaded_file($img,'../img/posts/'.$imgname)){
-					$sel="SELECT id from posts where id=(SELECT LAST_INSERT_ID())";
-					$rsel=mysqli_query($conn,$sel);
-					$gsel=mysqli_fetch_assoc($rsel);
-					$nid=$gsel['id'];
-					echo "S".$nid;
-				}
-			}
-			else{
-				echo (mysqli_error($conn));
-			}
-		}
-		else if(isset($_POST['post'])&&isset($_POST['uname']) &&isset($_POST['title'])) {
-			$uname=$_POST['uname'];
-			$post=$_POST['post'];
-			$head=$_POST['title'];
-			$post=str_replace("'","''",$post);
-		
-			$tt=time();
-
-			$del="INSERT into posts (head,post,uploader,`time`)values('$head','$post','$uname','$tt')";
-			$rdel=mysqli_query($conn,$del);
-			if ($rdel) {
-					$sel="SELECT id from posts where id=(SELECT LAST_INSERT_ID())";
-					$rsel=mysqli_query($conn,$sel);
-					$gsel=mysqli_fetch_assoc($rsel);
-					$nid=$gsel['id'];
-					echo "S".$nid;
-			}
-			else{
-				echo (mysqli_error($conn));
-			}
-		}
-		else{
-	        	header('Location:/dashboard/npost.php');
-		}
-	}
-	else{
-		header('Location:index.php');
-	}
-
-?>
