@@ -52,8 +52,8 @@ include 'dashboard-nav.php' ?>
               <td><?= $row['book_image']; ?></td>
               <td class="text-justify"><?= $row['book_descr']; ?></td>
               <td><?= $row['book_price']; ?></td>
-              <td><a href="editbook.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
-              <a href="deletebook.php?bookisbn=<?= $row['book_isbn']; ?>">Delete</a></td>
+              <td><a class="btn btn-sm btn-info" href="editbook.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
+              <a class="btn btn-sm btn-danger" href="deletebook.php?bookisbn=<?= $row['book_isbn']; ?>">Delete</a></td>
             </tr>
           <?php endwhile; ?>
         </tbody>
