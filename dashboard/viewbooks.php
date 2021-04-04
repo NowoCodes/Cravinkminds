@@ -38,7 +38,6 @@ include 'dashboard-nav.php' ?>
           // while ($row = mysqli_fetch_assoc($result)) : 
           ?>
           <?php
-          // $pquery = "SELECT * FROM register";
           $pquery = "SELECT * FROM register WHERE username='$cravinkuname'";
           $presult = mysqli_query($conn, $pquery);
           while ($parray = mysqli_fetch_assoc($presult)) :
