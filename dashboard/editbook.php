@@ -33,10 +33,9 @@ if (!$result) {
 }
 $row = mysqli_fetch_assoc($result);
 ?>
-<script type="text/javascript" src="js/npost.js"></script>
 
-<main role="main" class="col-md-qw ml-sm-auto col-lg-10 pt-1 px-4">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<main role="main" class="col-md-qw ml-sm-auto pt-1 px-5">
+  <div class="justify-content-start flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
     <form method="post" action="bookedit.php" enctype="multipart/form-data">
       <h1 class="display-1">Edit Book</h1>
@@ -59,7 +58,11 @@ $row = mysqli_fetch_assoc($result);
         </tr>
         <tr>
           <th>Description</th>
-          <td><textarea name="descr" cols="40" rows="5"><?php echo $row['book_descr']; ?></textarea>
+          <td><textarea class="form-control"name="descr" rows="5"><?php echo $row['book_descr']; ?></textarea>
+        </tr>
+        <tr>
+          <th>Link</th>
+          <td><input type="text" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
         </tr>
         <tr>
           <th>Price</th>
