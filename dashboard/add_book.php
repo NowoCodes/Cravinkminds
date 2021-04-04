@@ -11,19 +11,22 @@ include 'dashboard-nav.php';
 
 
 if (isset($_POST['add'])) {
-  $isbn = trim($_POST['isbn']);
+  $isbn = sanitize($_POST['isbn']);
   $isbn = mysqli_real_escape_string($conn, $isbn);
 
-  $title = trim($_POST['title']);
+  $title = sanitize($_POST['title']);
   $title = mysqli_real_escape_string($conn, $title);
 
-  $author = trim($_POST['author']);
+  $author = sanitize($_POST['author']);
   $author = mysqli_real_escape_string($conn, $author);
 
-  $descr = trim($_POST['descr']);
+  $descr = sanitize($_POST['descr']);
   $descr = mysqli_real_escape_string($conn, $descr);
 
-  $price = floatval(trim($_POST['price']));
+  $link = sanitize($_POST['link']);
+  $link = mysqli_real_escape_string($conn, $link);
+
+  $price = floatval(sanitize($_POST['price']));
   $price = mysqli_real_escape_string($conn, $price);
 
   // add image
@@ -33,10 +36,11 @@ if (isset($_POST['add'])) {
     $target_dir = "../img/books/";
     $target_file = $target_dir . basename($image);
     move_uploaded_file($img, $target_file);
-    // $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-    // $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "img/books/";
-    // $uploadDirectory .= $image;
-    // move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
+
+  // $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+  // $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "img/books/";
+  // $uploadDirectory .= $image;
+  // move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
   }
   // if (isset($_FILES['file']) && $_FILES['file']['name'] != "") {
   //   $image = $_FILES['file']['name'];
@@ -45,9 +49,13 @@ if (isset($_POST['add'])) {
   //   $uploadDirectory .= $image;
   //   move_uploaded_file($_FILES['file']['tmp_name'], $uploadDirectory);
   // }
+  $a = "SELECT * FROM register WHERE username = '$cravinkuname'";
+  $b = mysqli_query($conn, $a);
+  $c = mysqli_fetch_assoc($b);
+  $d = $c['id'];
 
-  $q = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price) 
-        VALUES ('$isbn', '$title', '$author', '$image', '$descr', '$price')";
+  $query = "INSERT INTO books (id, book_isbn, book_title, book_author, book_image, book_descr, book_price, purchase_link) 
+        VALUES ('$d', '$isbn', '$title', '$author', '$image', '$descr', '$price', '$link')";
 
   // $query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "')";
   $result = mysqli_query($conn, $query);
@@ -60,8 +68,8 @@ if (isset($_POST['add'])) {
 }
 ?>
 
-<main role="main" class="col-md-qw ml-sm-auto col-lg-10 pt-1 px-4">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<main role="main" class="col-md-qw ml-sm-auto pt-1 px-5 mx-5">
+  <div class="flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
     <form method="post" action="add_book.php" enctype="multipart/form-data">
       <h1 class="display-1">Add Book</h1>
@@ -85,7 +93,11 @@ if (isset($_POST['add'])) {
         </tr>
         <tr>
           <th>Description</th>
-          <td><textarea name="descr" cols="40" rows="5"></textarea></td>
+          <td><textarea name="descr" class="form-control" rows="5"></textarea></td>
+        </tr>
+        <tr>
+          <th>Purchase Link</th>
+          <td><input type="text" name="link"></td>
         </tr>
         <tr>
           <th>Price</th>
