@@ -61,7 +61,7 @@ $row = mysqli_fetch_assoc($result);
           <td><textarea class="form-control"name="descr" rows="5"><?php echo $row['book_descr']; ?></textarea>
         </tr>
         <tr>
-          <th>Link</th>
+          <th>Purchase Link</th>
           <td><input type="text" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
         </tr>
         <tr>

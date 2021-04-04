@@ -27,7 +27,7 @@ include 'dashboard-nav.php' ?>
             <th>Author</th>
             <th>Image</th>
             <th>Description</th>
-            <th>Link</th>
+            <th>Purchase Link</th>
             <th>Price</th>
             <th>Actions</th>
           </tr>
