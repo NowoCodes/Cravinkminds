@@ -2,8 +2,7 @@
 $title = 'View Books';
 $page = 'viewbooks';
 session_start();
-// include '../engine/conn.php';
-include '../functions/db_functions.php';
+include '../engine/conn.php';
 
 if (isset($_SESSION['cravinkuname'])) {
   $cravinkuname = $_SESSION['cravinkuname'];
@@ -28,7 +27,7 @@ include 'dashboard-nav.php' ?>
             <th>Author</th>
             <th>Image</th>
             <th>Description</th>
-            <th col="2">Link</th>
+            <th>Link</th>
             <th>Price</th>
             <th>Actions</th>
           </tr>
@@ -54,9 +53,12 @@ include 'dashboard-nav.php' ?>
                 <td><?= $row['book_author']; ?></td>
                 <td><?= $row['book_image']; ?></td>
                 <td class="text-justify"><?= $row['book_descr']; ?></td>
-                <td class="text-break"><a class="text-warning text-decoration-none" href="<?= $row['purchase_link']; ?>"><?= $row['purchase_link']; ?></a></td>
+                <td class="text-break">
+                  <a class="text-warning text-decoration-none" target="_blank" href="<?= $row['purchase_link']; ?>"><?= $row['purchase_link']; ?></a>
+                </td>
                 <td><?= $row['book_price']; ?></td>
-                <td><a class="btn btn-sm btn-info" href="editbook.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
+                <td>
+                  <a class="btn btn-sm btn-info" href="editbook.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
                   <a class="btn btn-sm btn-danger" href="deletebook.php?bookisbn=<?= $row['book_isbn']; ?>">Delete</a>
                 </td>
               </tr>
