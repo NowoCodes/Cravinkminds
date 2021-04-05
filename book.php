@@ -40,16 +40,26 @@ if (!$row) {
           <td><?= $row['book_author'] ?></td>
         </tr>
         <tr>
+          <td>Publisher</td>
+          <td><?php 
+          $publisher_result = mysqli_query($conn, $query);
+          while ($parray = mysqli_fetch_assoc($publisher_result)) :
+            $bookId = $parray['id'];
+            $rquery = "SELECT name FROM register WHERE id = '$bookId'";
+            $cresult = mysqli_query($conn, $rquery);
+              $rrow = mysqli_fetch_assoc($cresult);
+              echo $rrow['name'];
+            endwhile;
+
+          ?></td>
+        </tr>
+        <tr>
           <td>Price</td>
           <td><?= $row['book_price'] ?></td>
         </tr>
 
       </tbody>
     </table>
-    <!-- <form method="post" action="cart.php">
-      <input type="hidden" name="bookisbn" value="<?= $book_isbn; ?>">
-      <input type="submit" value="Purchase" name="purchase" class="btn btn-success mb-4">
-    </form> -->
     <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none">Purchase</a>
   </div>
 </div>
