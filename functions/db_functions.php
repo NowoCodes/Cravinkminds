@@ -14,14 +14,6 @@ function getBooks($conn) {
   }
 }
 
-function getPublisherId($conn, $bookId)
-{
-  $cquery = "SELECT * FROM books WHERE id = '$bookId'";
-  $cresult = mysqli_query($conn, $cquery);
-  // $carray = mysqli_fetch_assoc($cresult);
-  return $cresult;
-} 
-
 function getAll($conn)
 {
   $query = "SELECT * from books ORDER BY book_isbn DESC";
