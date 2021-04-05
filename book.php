@@ -23,48 +23,44 @@ if (!$row) {
 <p class="lead ml-4 mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
 <div class="row">
   <div class="col-md-3 text-center">
-    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>"> 
+    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
   </div>
   <div class="col-md-6">
     <h4>Book Description</h4>
     <p class="text-justify"><?= $row['book_descr']; ?></p>
     <h4>Book Details</h4>
     <table class="table">
-      <?php foreach ($row as $key => $value) {
-        if ($key == "book_descr" || $key == "book_image" || $key == "book_title") {
-          continue;
-        }
-        switch ($key) {
-          case "book_isbn":
-            $key = "ISBN";
-            break;
-          case "book_title":
-            $key = "Title";
-            break;
-          case "book_author":
-            $key = "Author";
-            break;
-          case "book_price":
-            $key = "Price";
-            break;
-        }
-      ?>
+      <tbody>
         <tr>
-          <td><?= $key; ?></td>
-          <td><?= $value; ?></td>
+          <td>ISBN</td>
+          <td><?= $row['book_isbn'] ?></td>
         </tr>
-      <?php
-      }
-      if (isset($conn)) {
-        mysqli_close($conn);
-      }
-      ?>
+        <tr>
+          <td>Author</td>
+          <td><?= $row['book_author'] ?></td>
+        </tr>
+        <tr>
+          <td>Publisher</td>
+          <td><?php 
+          $publisher_result = mysqli_query($conn, $query);
+          while ($parray = mysqli_fetch_assoc($publisher_result)) :
+            $bookId = $parray['id'];
+            $rquery = "SELECT name FROM register WHERE id = '$bookId'";
+            $cresult = mysqli_query($conn, $rquery);
+              $rrow = mysqli_fetch_assoc($cresult);
+              echo $rrow['name'];
+            endwhile;
+
+          ?></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td><?= $row['book_price'] ?></td>
+        </tr>
+
+      </tbody>
     </table>
-    <!-- <form method="post" action="cart.php">
-      <input type="hidden" name="bookisbn" value="<?= $book_isbn; ?>">
-      <input type="submit" value="Purchase" name="purchase" class="btn btn-success mb-4">
-    </form> -->
-    <a role="button" target="_blank" href="https://paystack.com/pay/cravinkmindsbook" class="btn btn-success mb-4 text-decoration-none">Purchase</a>
+    <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none">Purchase</a>
   </div>
 </div>
 

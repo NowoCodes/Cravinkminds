@@ -33,43 +33,51 @@ if (!$result) {
 }
 $row = mysqli_fetch_assoc($result);
 ?>
-<script type="text/javascript" src="js/npost.js"></script>
 
-<main role="main" class="col-md-qw ml-sm-auto col-lg-10 pt-1 px-4">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<main role="main" class="col-md-qw ml-sm-auto pt-1 px-5">
+  <div class="justify-content-start flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
     <form method="post" action="bookedit.php" enctype="multipart/form-data">
       <h1 class="display-1">Edit Book</h1>
       <table class="table">
         <tr>
           <th>ISBN</th>
-          <td><input type="text" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
+          <td><input type="text" class="form-control" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
         </tr>
         <tr>
           <th>Title</th>
-          <td><input type="text" name="title" value="<?php echo $row['book_title']; ?>" required></td>
+          <td><input type="text" class="form-control" name="title" value="<?php echo $row['book_title']; ?>" required></td>
         </tr>
         <tr>
           <th>Author</th>
-          <td><input type="text" name="author" value="<?php echo $row['book_author']; ?>" required></td>
+          <td><input type="text" class="form-control" name="author" value="<?php echo $row['book_author']; ?>" required></td>
         </tr>
         <tr>
           <th>Image</th>
-          <td><input type="file" name="image"></td>
+          <td>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="image">
+              <label class="custom-file-label" for="customFile"><?= $row['book_image'] ?></label>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>Description</th>
-          <td><textarea name="descr" cols="40" rows="5"><?php echo $row['book_descr']; ?></textarea>
+          <td><textarea class="form-control" name="descr" rows="5"><?php echo $row['book_descr']; ?></textarea>
+        </tr>
+        <tr>
+          <th>Purchase Link</th>
+          <td><input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
         </tr>
         <tr>
           <th>Price</th>
-          <td><input type="text" name="price" value="<?php echo $row['book_price']; ?>" required></td>
+          <td><input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" required></td>
         </tr>
       </table>
-      <input type="submit" name="save_change" value="Change" class="btn btn-primary">
-      <input type="reset" value="cancel" class="btn btn-default">
+      <input type="submit" name="save_change" value="Change" class="btn btn-primary btn-sm">
+      <input type="reset" value="cancel" class="btn btn-default btn-sm">
       <br>
-      <a href="viewbooks.php" class="mt-4 btn btn-success">Confirm</a>
+      <a href="viewbooks.php" class="mt-4 btn btn-success btn-sm">Confirm</a>
     </form>
 
   </div>
@@ -81,6 +89,13 @@ if (isset($conn)) {
 ?>
 
 
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 </body>
 
 </html>
