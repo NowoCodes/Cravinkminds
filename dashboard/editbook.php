@@ -56,8 +56,8 @@ $row = mysqli_fetch_assoc($result);
           <th>Image</th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="image">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+              <input type="file" class="custom-file-input" name="image">
+              <label class="custom-file-label" for="customFile"><?= $row['book_image'] ?></label>
             </div>
           </td>
         </tr>
@@ -89,6 +89,13 @@ if (isset($conn)) {
 ?>
 
 
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 </body>
 
 </html>
