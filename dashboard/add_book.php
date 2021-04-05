@@ -33,7 +33,7 @@ include 'dashboard-nav.php';
           <th>Image</th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="image">
+              <input type="file" class="custom-file-input" name="image">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </td>
@@ -56,8 +56,16 @@ include 'dashboard-nav.php';
   <input type="reset" value="cancel" class="btn bt btn-default">
   </form>
   <br />
+  <a href="viewbooks.php" type="button" class="btn btn-sm">Back</a>
 </main>
 
+<script>
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
 </body>
 
 </html>
