@@ -42,37 +42,42 @@ $row = mysqli_fetch_assoc($result);
       <table class="table">
         <tr>
           <th>ISBN</th>
-          <td><input type="text" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
+          <td><input type="text" class="form-control" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
         </tr>
         <tr>
           <th>Title</th>
-          <td><input type="text" name="title" value="<?php echo $row['book_title']; ?>" required></td>
+          <td><input type="text" class="form-control" name="title" value="<?php echo $row['book_title']; ?>" required></td>
         </tr>
         <tr>
           <th>Author</th>
-          <td><input type="text" name="author" value="<?php echo $row['book_author']; ?>" required></td>
+          <td><input type="text" class="form-control" name="author" value="<?php echo $row['book_author']; ?>" required></td>
         </tr>
         <tr>
           <th>Image</th>
-          <td><input type="file" name="image"></td>
+          <td>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="image">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>Description</th>
-          <td><textarea class="form-control"name="descr" rows="5"><?php echo $row['book_descr']; ?></textarea>
+          <td><textarea class="form-control" name="descr" rows="5"><?php echo $row['book_descr']; ?></textarea>
         </tr>
         <tr>
           <th>Purchase Link</th>
-          <td><input type="text" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
+          <td><input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
         </tr>
         <tr>
           <th>Price</th>
-          <td><input type="text" name="price" value="<?php echo $row['book_price']; ?>" required></td>
+          <td><input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" required></td>
         </tr>
       </table>
-      <input type="submit" name="save_change" value="Change" class="btn btn-primary">
-      <input type="reset" value="cancel" class="btn btn-default">
+      <input type="submit" name="save_change" value="Change" class="btn btn-primary btn-sm">
+      <input type="reset" value="cancel" class="btn btn-default btn-sm">
       <br>
-      <a href="viewbooks.php" class="mt-4 btn btn-success">Confirm</a>
+      <a href="viewbooks.php" class="mt-4 btn btn-success btn-sm">Confirm</a>
     </form>
 
   </div>

@@ -19,36 +19,41 @@ include 'dashboard-nav.php';
       <table class="table">
         <tr>
           <th>ISBN</th>
-          <td><input type="text" name="isbn"></td>
+          <td><input type="text" class="form-control" name="isbn"></td>
         </tr>
         <tr>
           <th>Title</th>
-          <td><input type="text" name="title" required></td>
+          <td><input type="text" class="form-control" name="title" required></td>
         </tr>
         <tr>
           <th>Author</th>
-          <td><input type="text" name="author" required></td>
+          <td><input type="text" class="form-control" name="author" required></td>
         </tr>
         <tr>
           <th>Image</th>
-          <td><input type="file" name="image" class="adnpic"></td>
+          <td>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="image">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>Description</th>
-          <td><textarea name="descr" form-control" rows="5"></textarea></td>
+          <td><textarea name="descr" class="form-control" form-control" rows="5"></textarea></td>
         </tr>
         <tr>
           <th>Purchase Link</th>
-          <td><input type="text" name="link"></td>
+          <td><input type="text" class="form-control" name="link"></td>
         </tr>
         <tr>
           <th>Price</th>
-          <td><input type="text" name="price" required></td>
+          <td><input type="text" class="form-control" name="price" required></td>
         </tr>
       </table>
   </div>
-  <input type="submit" name="add" value="Add new book" class="btn btn-success ednnsub">
-  <input type="reset" value="cancel" class="btn btn-default">
+  <input type="submit" name="add" value="Add new book" class="btn btn-sm btn-success">
+  <input type="reset" value="cancel" class="btn bt btn-default">
   </form>
   <br />
 </main>
