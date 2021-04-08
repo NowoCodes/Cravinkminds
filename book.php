@@ -44,14 +44,14 @@ if (!$row) {
           <td>Published By</td>
           <td>
             <?php
-              $publisher_result = mysqli_query($conn, $query);
-              while ($parray = mysqli_fetch_assoc($publisher_result)) :
-                $bookId = $parray['id'];
-                $rquery = "SELECT name FROM register WHERE id = '$bookId'";
-                $cresult = mysqli_query($conn, $rquery);
-                $rrow = mysqli_fetch_assoc($cresult);
-                echo $rrow['name'];
-              endwhile;
+            $publisher_result = mysqli_query($conn, $query);
+            while ($parray = mysqli_fetch_assoc($publisher_result)) :
+              $bookId = $parray['id'];
+              $rquery = "SELECT name FROM register WHERE id = '$bookId'";
+              $cresult = mysqli_query($conn, $rquery);
+              $rrow = mysqli_fetch_assoc($cresult);
+              echo $rrow['name'];
+            endwhile;
             ?>
           </td>
         </tr>
@@ -71,6 +71,11 @@ if (!$row) {
       </tbody>
     </table>
     <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none">Purchase</a>
+
+    <!-- <form method="post" action="cart.php">
+      <input type="hidden" name="bookisbn" value="<?php echo $book_isbn; ?>">
+      <input type="submit" value="Purchase / Add to cart" name="cart" class="btn btn-success mb-4">
+    </form> -->
   </div>
 </div>
 
