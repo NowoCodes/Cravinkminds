@@ -74,10 +74,8 @@ $row = mysqli_fetch_assoc($result);
           <td><input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" required></td>
         </tr>
       </table>
-      <input type="submit" name="save_change" value="Change" class="btn btn-primary btn-sm">
+      <input type="submit" name="save_change" value="Update" class="btn btn-sm btn-success">
       <input type="reset" value="cancel" class="btn btn-default btn-sm">
-      <br>
-      <a href="viewbooks.php" class="mt-4 btn btn-success btn-sm">Confirm</a>
     </form>
 
   </div>

@@ -42,5 +42,6 @@ if (!$result) {
   echo "Can't update data " . mysqli_error($conn);
   exit;
 } else {
-  header("Location: editbook.php?bookisbn=$isbn");
+  // header("Location: editbook.php?bookisbn=$isbn");
+  header("Location: viewbooks.php");
 }
