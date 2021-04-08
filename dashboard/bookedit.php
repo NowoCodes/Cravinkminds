@@ -18,6 +18,7 @@ $author = sanitize($_POST['author']);
 $descr = sanitize($_POST['descr']);
 $link = sanitize($_POST['link']);
 $price = floatval(sanitize($_POST['price']));
+$listprice = floatval(sanitize($_POST['list_price']));
 
 if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
   $image = $_FILES['image']['name'];
@@ -30,7 +31,8 @@ $query = "UPDATE books SET
 	book_author = '$author',
 	book_descr = '$descr',
   purchase_link = '$link',
-	book_price = '$price'";
+	book_price = '$price',
+	list_price = '$listprice'";
 if (isset($image)) {
   $query .= ", book_image = '$image' WHERE `book_isbn` = '$isbn'";
 } else {

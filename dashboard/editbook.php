@@ -45,11 +45,11 @@ $row = mysqli_fetch_assoc($result);
           <td><input type="text" class="form-control" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
         </tr>
         <tr>
-          <th>Title</th>
+          <th>Title <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="title" value="<?php echo $row['book_title']; ?>" required></td>
         </tr>
         <tr>
-          <th>Author</th>
+          <th>Author <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="author" value="<?php echo $row['book_author']; ?>" required></td>
         </tr>
         <tr>
@@ -70,14 +70,18 @@ $row = mysqli_fetch_assoc($result);
           <td><input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>"></td>
         </tr>
         <tr>
-          <th>Price</th>
+          <th>Price <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" required></td>
+        </tr>
+        <tr>
+          <th>List Price</th>
+          <td><input type="text" class="form-control" name="list_price" value="<?php echo $row['list_price']; ?>"></td>
         </tr>
       </table>
       <input type="submit" name="save_change" value="Update" class="btn btn-sm btn-success">
       <input type="reset" value="cancel" class="btn btn-default btn-sm">
     </form>
-
+    <a href="viewbooks.php" type="button" class="btn btn-sm">Back</a>
   </div>
 </main>
 <?php
@@ -88,11 +92,11 @@ if (isset($conn)) {
 
 
 <script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
 </script>
 </body>
 
