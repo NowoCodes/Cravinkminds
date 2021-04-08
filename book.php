@@ -4,6 +4,7 @@ $title = "Book - CravinkMinds";
 $description = "Tired of the heart ache of wirtter's block-you want to write but can't get?..........";
 include 'header.php';
 include 'engine/conn.php';
+include 'functions/db_functions.php';
 
 $book_isbn = $_GET['bookisbn'];
 $query = "SELECT * FROM books WHERE book_isbn = '$book_isbn'";
@@ -40,22 +41,31 @@ if (!$row) {
           <td><?= $row['book_author'] ?></td>
         </tr>
         <tr>
-          <td>Publisher</td>
-          <td><?php 
-          $publisher_result = mysqli_query($conn, $query);
-          while ($parray = mysqli_fetch_assoc($publisher_result)) :
-            $bookId = $parray['id'];
-            $rquery = "SELECT name FROM register WHERE id = '$bookId'";
-            $cresult = mysqli_query($conn, $rquery);
-              $rrow = mysqli_fetch_assoc($cresult);
-              echo $rrow['name'];
-            endwhile;
-
-          ?></td>
+          <td>Published By</td>
+          <td>
+            <?php
+              $publisher_result = mysqli_query($conn, $query);
+              while ($parray = mysqli_fetch_assoc($publisher_result)) :
+                $bookId = $parray['id'];
+                $rquery = "SELECT name FROM register WHERE id = '$bookId'";
+                $cresult = mysqli_query($conn, $rquery);
+                $rrow = mysqli_fetch_assoc($cresult);
+                echo $rrow['name'];
+              endwhile;
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td>Publication Date</td>
+          <td><?= pretty_date($row['created_at']); ?></td>
+        </tr>
+        <tr>
+          <td>Previous Price</td>
+          <td><strike class="text-red">$<?= $row['list_price']; ?></strike></td>
         </tr>
         <tr>
           <td>Price</td>
-          <td><?= $row['book_price'] ?></td>
+          <td>$<?= $row['book_price'] ?></td>
         </tr>
 
       </tbody>

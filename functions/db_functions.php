@@ -32,3 +32,8 @@ function sanitize($dirty){
   return stripslashes($dirty);
   return htmlspecialchars($dirty);
 }
+
+function pretty_date($date) {
+  date_default_timezone_set("Africa/Lagos");
+  return date("M d, Y h:i A", strtotime($date));
+}
