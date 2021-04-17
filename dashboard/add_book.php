@@ -22,11 +22,11 @@ include 'dashboard-nav.php';
           <td><input type="text" class="form-control" name="isbn"></td>
         </tr>
         <tr>
-          <th>Title</th>
+          <th>Title <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="title" required></td>
         </tr>
         <tr>
-          <th>Author</th>
+          <th>Author <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="author" required></td>
         </tr>
         <tr>
@@ -47,8 +47,12 @@ include 'dashboard-nav.php';
           <td><input type="text" class="form-control" name="link"></td>
         </tr>
         <tr>
-          <th>Price</th>
+          <th>Price <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="price" required></td>
+        </tr>
+        <tr>
+          <th>List Price</th>
+          <td><input type="text" class="form-control" name="list_price"></td>
         </tr>
       </table>
   </div>

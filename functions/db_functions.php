@@ -1,6 +1,14 @@
 <?php
 
 // include '../engine/conn.php';
+function db_connect(){
+  $conn=mysqli_connect('localhost','root','','cravinkm_cravink');
+  if(!$conn){
+    echo "Can't connect database " . mysqli_connect_error($conn);
+    exit;
+  }
+  return $conn;
+}
 
 function getBooks($conn) {
   $pquery = "SELECT * FROM register";
@@ -12,6 +20,28 @@ function getBooks($conn) {
   } else {
     return null;
   }
+}
+
+function getbookprice($isbn){
+  $conn = db_connect();
+  $query = "SELECT book_price FROM books WHERE book_isbn = '$isbn'";
+  $result = mysqli_query($conn, $query);
+  if(!$result){
+    echo "get book price failed! " . mysqli_error($conn);
+    exit;
+  }
+  $row = mysqli_fetch_assoc($result);
+  return $row['book_price'];
+}
+
+function getBookByIsbn($conn, $isbn){
+  $query = "SELECT book_title, book_author, book_price FROM books WHERE book_isbn = '$isbn'";
+  $result = mysqli_query($conn, $query);
+  if(!$result){
+    echo "Can't retrieve data " . mysqli_error($conn);
+    exit;
+  }
+  return $result;
 }
 
 function getAll($conn)
@@ -31,4 +61,9 @@ function sanitize($dirty){
   return trim($dirty);
   return stripslashes($dirty);
   return htmlspecialchars($dirty);
+}
+
+function pretty_date($date) {
+  date_default_timezone_set("Africa/Lagos");
+  return date("M d, Y h:i A", strtotime($date));
 }
