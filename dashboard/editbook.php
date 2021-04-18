@@ -12,20 +12,15 @@ if (isset($_SESSION['cravinkuname'])) {
 include 'dashboard-nav.php';
 
 
-if (isset($_GET['bookisbn'])) {
-  $book_isbn = $_GET['bookisbn'];
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
 } else {
   echo "Empty query!";
   exit;
 }
 
-if (!isset($book_isbn)) {
-  echo "Empty isbn! check again!";
-  exit;
-}
-
 // get book data
-$query = "SELECT * FROM books WHERE book_isbn = '$book_isbn'";
+$query = "SELECT * FROM books WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 if (!$result) {
   echo "Can't retrieve data " . mysqli_error($conn);
@@ -40,10 +35,7 @@ $row = mysqli_fetch_assoc($result);
     <form method="post" action="bookedit.php" enctype="multipart/form-data">
       <h1 class="display-1">Edit Book</h1>
       <table class="table">
-        <tr>
-          <th>ISBN</th>
-          <td><input type="text" class="form-control" name="isbn" value="<?php echo $row['book_isbn']; ?>" readOnly="true"></td>
-        </tr>
+        <input value="<?= $row['id']; ?>" name="id" type="hidden">
         <tr>
           <th>Title <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="title" value="<?php echo $row['book_title']; ?>" required></td>
@@ -53,11 +45,20 @@ $row = mysqli_fetch_assoc($result);
           <td><input type="text" class="form-control" name="author" value="<?php echo $row['book_author']; ?>" required></td>
         </tr>
         <tr>
-          <th>Image</th>
+          <th>Cover Image  <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="image">
               <label class="custom-file-label" for="customFile"><?= $row['book_image'] ?></label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Book <span class="text-danger">*</span></th>
+          <td>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="ebook">
+              <label class="custom-file-label" for="customFile"><?= $row['ebook'] ?></label>
             </div>
           </td>
         </tr>
