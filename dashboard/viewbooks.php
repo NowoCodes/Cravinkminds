@@ -22,7 +22,6 @@ include 'dashboard-nav.php' ?>
       <table class="table table-sm">
         <thead>
           <tr>
-            <th>ISBN</th>
             <th>Title</th>
             <th>Author</th>
             <th>Image</th>
@@ -43,12 +42,11 @@ include 'dashboard-nav.php' ?>
           $presult = mysqli_query($conn, $pquery);
           while ($parray = mysqli_fetch_assoc($presult)) :
             $bookId = $parray['id'];
-            $cquery = "SELECT * FROM books WHERE id = '$bookId' ORDER BY book_isbn DESC";
+            $cquery = "SELECT * FROM books WHERE u_id = '$bookId' ORDER BY id DESC";
             $cresult = mysqli_query($conn, $cquery);
             while ($row = mysqli_fetch_assoc($cresult)) :
           ?>
               <tr>
-                <td><?= $row['book_isbn']; ?></td>
                 <td><?= $row['book_title']; ?></td>
                 <td><?= $row['book_author']; ?></td>
                 <td><?= $row['book_image']; ?></td>
@@ -59,8 +57,8 @@ include 'dashboard-nav.php' ?>
                 <td><?= $row['book_price']; ?></td>
                 <td><strike class="text-danger"><?= $row['list_price']; ?></strike></td>
                 <td>
-                  <a class="btn btn-sm btn-info" href="editbook.php?bookisbn=<?= $row['book_isbn']; ?>">Edit</a>
-                  <a class="btn btn-sm btn-danger" href="deletebook.php?bookisbn=<?= $row['book_isbn']; ?>">Delete</a>
+                  <a class="btn btn-sm btn-info" href="editbook.php?id=<?= $row['id']; ?>">Edit</a>
+                  <a class="btn btn-sm btn-danger" href="deletebook.php?id=<?= $row['id']; ?>">Delete</a>
                 </td>
               </tr>
             <?php endwhile; ?>
