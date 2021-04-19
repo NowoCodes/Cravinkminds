@@ -28,7 +28,7 @@ if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
 
 if (isset($_FILES['ebook']) && $_FILES['ebook']['name'] != "") {
   $ebook = $_FILES['ebook']['name'];
-  $target = "books/" . basename($ebook);
+  $target = "../private/books/" . basename($ebook);
   move_uploaded_file($_FILES['ebook']['tmp_name'], $target);
 }
 
