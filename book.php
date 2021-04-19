@@ -19,14 +19,15 @@ if (!$row) {
   echo "Empty book";
   exit;
 }
+
 ?>
 
 <p class="lead ml-4 mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
 <div class="row container">
   <div class="col-md-3 text-center">
-  <a href="./img/books/<?= $row['book_image'] ?>" download="image1">
-    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
-  </a>
+    <a href="./img/books/<?= $row['book_image'] ?>" download="image1">
+      <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
+    </a>
   </div>
   <div class="col-md-6">
     <h4>Book Description</h4>
@@ -35,7 +36,7 @@ if (!$row) {
     <table class="table">
       <tbody>
         <tr>
-          <td>Author</td>
+          <td>Author <a href="private/purchase.php"> P </a></td>
           <td><?= $row['book_author'] ?></td>
         </tr>
         <tr>
@@ -69,38 +70,40 @@ if (!$row) {
       </tbody>
     </table>
     <?php if (!empty($row['purchase_link'])) : ?>
-    <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
+      <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
     <?php else : ?>
 
-    <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#pForm">Purchase</button>
+      <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#pForm">Purchase</button>
 
-    <div id="pForm" class="collapse">
-      <form id="paymentForm">
-        <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email-address" required>
-        </div>
-        <div class="form-group">
-          <label for="amount">Amount</label>
-          <input type="tel" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
-        </div>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <div class="form-group">
-              <label for="first-name">First Name</label>
-              <input type="text" class="form-control" id="first-name" />
+      <div id="pForm" class="collapse">
+        <form id="paymentForm">
+          <!-- <form id="paymentForm" action="pay.php" method="POST"> -->
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email-address" required>
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
+            <input type="tel" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" class="form-control" id="first-name" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" class="form-control" id="last-name" />
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" class="form-control" id="last-name" />
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-success mb-3" onclick="payWithPaystack()"> Pay </button>
-      </form>
-    </div>
+          <button type="submit" class="btn btn-success mb-3" onclick="payWithPaystack()"> Pay </button>
+        </form>
+      </div>
 
     <?php endif; ?>
   </div>
@@ -122,16 +125,23 @@ if (!$row) {
       key: 'pk_test_21817dec44e03c6736666c8196ecda193d8c9f9e', // Replace with your public key
       email: document.getElementById("email-address").value,
       amount: document.getElementById("amount").value * 100,
-      // ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      ref: 'CIM'+Math.floor((Math.random() * 1000000000) + 1),
+      metadata: {
+        custom_fields: [{
+          book_id: document.getElementById("book_id").value,
+        }]
+      },
       // label: "Optional string that replaces customer email"
       onClose: function() {
-        alert('Transaction Cancelled.');
+        alert('Transaction was not completed, window closed.');
       },
       callback: function(response) {
-        let message = 'Payment complete! Reference: ' + response.reference;
-        alert(message);
-      }
-
+        let reference = response.reference;
+        // let message = 'Payment complete! Reference: ' + reference;
+        // alert(message);
+        // window.location = "https://www.cravinkminds.com/verify_transaction.php?reference=" + reference
+        window.location = 'http://localhost/cravinkminds/verify_transaction.php?reference=' + reference;
+      },
     });
 
     handler.openIframe();
