@@ -40,6 +40,7 @@ if (isset($_POST['add'])) {
   }
 
   $imageeee = empty($image) ? 'default.jpg' : $image;
+  $lp = empty($listprice) ? 0 : $listprice;
 
   $a = "SELECT * FROM register WHERE username = '$cravinkuname'";
   $b = mysqli_query($conn, $a);
@@ -47,7 +48,7 @@ if (isset($_POST['add'])) {
   $d = $c['id'];
 
   $query = "INSERT INTO books (u_id, book_title, book_author, book_image, ebook, book_descr, book_price, list_price, purchase_link)
-  VALUES ('$d', '$title', '$author', '$imageeee', '$ebook', '$descr', '$price', '$listprice', '$purchase_link')";
+  VALUES ('$d', '$title', '$author', '$imageeee', '$ebook', '$descr', '$price', '$lp', '$purchase_link')";
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
