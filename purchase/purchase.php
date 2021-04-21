@@ -7,33 +7,33 @@ $book_id = $_GET['book_id'];
 $query = "SELECT * FROM books WHERE id = '$book_id'";
 $result = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
-$url =
-  'https://contribute.geeksforgeeks.org/wp-content/uploads/gfg-40.png';
+// $url =
+//   'https://contribute.geeksforgeeks.org/wp-content/uploads/gfg-40.png';
 
-// Use basename() function to 
-// return the file  
-$file_name = basename($url);
+// // Use basename() function to 
+// // return the file  
+// $file_name = basename($url);
 
-// Use file_get_contents() function 
-// to get the file from url and use 
-// file_put_contents() function to 
-// save the file by using base name 
-if (file_put_contents(
-  $file_name,
-  file_get_contents($url)
-)) {
-  $alert = '<div class="alert alert-success alert-dismissible fade show">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Success!</strong> Book Downloaded
-            </div>';
-  echo $alert;
-} else {
-  $alert = '<div class="alert alert-danger alert-dismissible fade show">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Download Failed.</strong>
-            </div>';
-  echo $alert;
-}
+// // Use file_get_contents() function 
+// // to get the file from url and use 
+// // file_put_contents() function to 
+// // save the file by using base name 
+// if (file_put_contents(
+//   $file_name,
+//   file_get_contents($url)
+// )) {
+//   $alert = '<div class="alert alert-success alert-dismissible fade show">
+//               <button type="button" class="close" data-dismiss="alert">&times;</button>
+//               <strong>Success!</strong> Book Downloaded
+//             </div>';
+//   echo $alert;
+// } else {
+//   $alert = '<div class="alert alert-danger alert-dismissible fade show">
+//               <button type="button" class="close" data-dismiss="alert">&times;</button>
+//               <strong>Download Failed.</strong>
+//             </div>';
+//   echo $alert;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ if (file_put_contents(
 
 <body>
   <div class="container">
-    <h1>Download Book</h1>
+    <h1 class="text-center py-5">Download Book</h1>
     <div class="row">
       <div class="col-md-6">
         <img src="../img/books/<?= $result['book_image']; ?>" height="500" width="500" alt="Book Image">
@@ -60,10 +60,10 @@ if (file_put_contents(
       <div class="col-md-6">
         <h1>Author: <?= $result['book_author']; ?></h1>
         <h1>Price: <?= $result['book_price']; ?></h1>
-        <a href="books/<?= $row['ebook'] ?>" download="<?= $result['book_title']; ?>">
-          <span>Download</span>
+        <a href="books/<?= $result['ebook'] ?>" download="<?= $result['book_title']; ?>">
+
+          <button class="btn btn-success btn-block"> Download </button>
         </a>
-        <input type="button" class="btn btn-sm btn-success" download="<?= $result['book_title']; ?>" value="Download">
       </div>
     </div>
   </div>
