@@ -1,4 +1,6 @@
 <?php
+$title = 'Add Books';
+$page = 'add_book';
 include '../engine/conn.php';
 session_start();
 if (isset($_SESSION['cravinkuname'])) {
@@ -18,10 +20,6 @@ include 'dashboard-nav.php';
 
       <table class="table">
         <tr>
-          <th>ISBN</th>
-          <td><input type="text" class="form-control" name="isbn"></td>
-        </tr>
-        <tr>
           <th>Title <span class="text-danger">*</span></th>
           <td><input type="text" class="form-control" name="title" required></td>
         </tr>
@@ -30,10 +28,19 @@ include 'dashboard-nav.php';
           <td><input type="text" class="form-control" name="author" required></td>
         </tr>
         <tr>
-          <th>Image</th>
+          <th>Cover Image <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="image">
+              <input type="file" class="custom-file-input" name="image" required> 
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Book <span class="text-danger">*</span></th>
+          <td>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="ebook" required>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </td>

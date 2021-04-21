@@ -20,7 +20,7 @@ if (!$result) {
     <div class="row">
       <?php while ($query_row = mysqli_fetch_assoc($result)) : ?>
         <div class="col-md-3">
-          <a href="book.php?bookisbn=<?= $query_row['book_isbn']; ?>">
+          <a href="book.php?id=<?= $query_row['id']; ?>">
             <img class="img-responsive img-thumbnail" style="height: 300px; width:300px;" src="./img/books/<?= $query_row['book_image']; ?>">
           </a>
           <p><?= $query_row['book_title']; ?></p>

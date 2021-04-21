@@ -6,9 +6,9 @@ if (isset($_SESSION['cravinkuname'])) {
 } else {
   header("Location:../login.php");
 }
-	$book_isbn = $_GET['bookisbn'];
+	$id = $_GET['id'];
 
-	$query = "DELETE FROM books WHERE book_isbn = '$book_isbn'";
+	$query = "DELETE FROM books WHERE id = '$id'";
 	$result = mysqli_query($conn, $query);
 	if(!$result){
 		echo "delete data unsuccessfully " . mysqli_error($conn);
