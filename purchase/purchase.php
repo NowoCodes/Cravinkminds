@@ -52,16 +52,22 @@ $result = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
 <body>
   <div class="container">
+    <div class="navbar-header d-flex align-items-center justify-content-between">
+      <!-- Navbar Brand -->
+      <a href="../index.php" class="navbar-brand"><img src="../img/logo(2).png" width='120px'></a>
+      <!-- Toggle Button-->
+      <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
+    </div>
+
     <h1 class="text-center py-5">Download Book</h1>
     <div class="row">
-      <div class="col-md-6">
-        <img src="../img/books/<?= $result['book_image']; ?>" height="500" width="500" alt="Book Image">
+      <div class="col">
+        <img class="image-fluid" src="../img/books/<?= $result['book_image']; ?>" height="500" width="500" alt="Book Image">
       </div>
-      <div class="col-md-6">
+      <div class="col">
         <h1>Author: <?= $result['book_author']; ?></h1>
         <h1>Price: <?= $result['book_price']; ?></h1>
         <a href="books/<?= $result['ebook'] ?>" download="<?= $result['book_title']; ?>">
-
           <button class="btn btn-success btn-block"> Download </button>
         </a>
       </div>
