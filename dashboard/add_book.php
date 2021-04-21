@@ -31,7 +31,7 @@ include 'dashboard-nav.php';
           <th>Cover Image <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="image">
+              <input type="file" class="custom-file-input" name="image"> required
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </td>
@@ -40,7 +40,7 @@ include 'dashboard-nav.php';
           <th>Book <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="ebook">
+              <input type="file" class="custom-file-input" name="ebook" required>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </td>

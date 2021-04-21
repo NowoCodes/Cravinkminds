@@ -48,7 +48,7 @@ $row = mysqli_fetch_assoc($result);
           <th>Cover Image  <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="image">
+              <input type="file" class="custom-file-input" name="image" required>
               <label class="custom-file-label" for="customFile"><?= $row['book_image'] ?></label>
             </div>
           </td>
@@ -57,7 +57,7 @@ $row = mysqli_fetch_assoc($result);
           <th>Book <span class="text-danger">*</span></th>
           <td>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="ebook">
+              <input type="file" class="custom-file-input" name="ebook" required>
               <label class="custom-file-label" for="customFile"><?= $row['ebook'] ?></label>
             </div>
           </td>
