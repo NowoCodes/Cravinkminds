@@ -35,7 +35,7 @@ if (isset($_POST['add'])) {
 
   if (isset($_FILES['ebook']) && $_FILES['ebook']['name'] != "") {
     $ebook = $_FILES['ebook']['name'];
-    $target = "../private/books/" . basename($ebook);
+    $target = "../purchase/books/" . basename($ebook);
     move_uploaded_file($_FILES['ebook']['tmp_name'], $target);
   }
 
