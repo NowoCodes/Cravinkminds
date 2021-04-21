@@ -81,9 +81,9 @@ if (!$row) {
             <input type="email" class="form-control" id="email-address" required>
           </div>
           <div class="form-group">
-            <label for="amount">Amount</label>
+            <!-- <label for="amount">Amount</label> -->
             <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
-            <input type="tel" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
+            <input type="hidden" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
           </div>
           <div class="row">
             <div class="col-md-6 form-group">
