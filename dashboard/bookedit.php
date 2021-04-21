@@ -12,18 +12,24 @@ if (!isset($_POST['save_change'])) {
   exit;
 }
 
-$isbn = sanitize($_POST['isbn']);
+$id = sanitize($_POST['id']);
 $title = sanitize($_POST['title']);
 $author = sanitize($_POST['author']);
 $descr = sanitize($_POST['descr']);
 $link = sanitize($_POST['link']);
-$price = floatval(sanitize($_POST['price']));
-$listprice = floatval(sanitize($_POST['list_price']));
+$price = sanitize($_POST['price']);
+$listprice = sanitize($_POST['list_price']);
 
 if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
   $image = $_FILES['image']['name'];
   $target = "../img/books/" . basename($image);
   move_uploaded_file($_FILES['image']['tmp_name'], $target);
+}
+
+if (isset($_FILES['ebook']) && $_FILES['ebook']['name'] != "") {
+  $ebook = $_FILES['ebook']['name'];
+  $target = "../private/books/" . basename($ebook);
+  move_uploaded_file($_FILES['ebook']['tmp_name'], $target);
 }
 
 $query = "UPDATE books SET
@@ -34,9 +40,13 @@ $query = "UPDATE books SET
 	book_price = '$price',
 	list_price = '$listprice'";
 if (isset($image)) {
-  $query .= ", book_image = '$image' WHERE `book_isbn` = '$isbn'";
-} else {
-  $query .= " WHERE `book_isbn` = '$isbn'";
+  $query .= ", book_image = '$image' WHERE `id` = '$id'";
+} 
+else if (isset($ebook)) {
+  $query .= ", ebook = '$ebook' WHERE `id` = '$id'";
+} 
+else {
+  $query .= " WHERE `id` = '$id'";
 }
 // two cases for file , if file submit is on => change a lot
 $result = mysqli_query($conn, $query);
