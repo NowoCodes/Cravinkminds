@@ -27,16 +27,15 @@ while ($parray = mysqli_fetch_assoc($presult)) :
     <h1>Account Name: <?= $row['acc_name'] ?></h1>
     <h1>Account No: <?= $row['acc_no'] ?></h1>
 
-    <a href="viewbooks.php" type="button" class="btn btn-sm">Back</a>
   </div>
-</main>
-</body>
 
-<?php 
+</main>
+    <?php
   endwhile;
 endwhile;
-?>
+    ?>
 
+    <a href="viewbooks.php" type="button" class="ml-5 btn btn-sm">Back</a>
 </body>
 
 </html>
