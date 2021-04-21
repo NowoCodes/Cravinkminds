@@ -1,17 +1,15 @@
 <?php
 include 'engine/conn.php';
 
-$ref = $_GET['reference'];
-if ($ref = "") {
-  header("Location: javascript://history.go(-1)");
+if (!$_SERVER['REQUEST_METHOD'] == 'GET' || !isset($_GET['reference'])) {
+  die("Transaction reference not found");
 }
 
 $curl = curl_init();
+$ref = $_GET['reference'];
 
 curl_setopt_array($curl, array(
-  // CURLOPT_URL => "https://api.paystack.co/transaction/verify/:reference",
-  // CURLOPT_URL => 'https://api.paystack.co/transaction/verify/' . rawurlencode($ref),
-  CURLOPT_URL => 'https://api.paystack.co/transaction/verify/' . $ref,
+  CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . $ref,
   CURLOPT_SSL_VERIFYPEER => false, // to test on localhost
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
@@ -34,9 +32,8 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+  // echo $response;
   $result = json_decode($response);
-  // echo $result->message;
 }
 
 if ($result->data->status == 'success') {
@@ -47,6 +44,7 @@ if ($result->data->status == 'success') {
   $fname = $result->data->customer->first_name;
   $fullname = $lname . ' ' . $fname;
   $customer_email = $result->data->customer->email;
+  $book_id = $result->data->metadata->custom_fields[0]->book_id;
 
   date_default_timezone_set('Africa/Lagos');
   $date_time = date('m/d/Y hi:s a', time());
@@ -59,12 +57,11 @@ if ($result->data->status == 'success') {
     echo "Can't add new data " . mysqli_error($conn);
     exit;
   } else {
-    header("Location: private/purchase.php?status=success");
+    header("Location: purchase/purchase.php?book_id=$book_id&status=success");
     exit;
   }
 } else {
   // header('HTTP/1.0 403 Forbidden', TRUE, 403);
-  print('error'. $err);
+  print('error' . $err);
   exit;
 }
-
