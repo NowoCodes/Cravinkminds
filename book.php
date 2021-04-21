@@ -129,6 +129,8 @@ if (!$row) {
       ref: 'CIM' + Math.floor((Math.random() * 1000000000) + 1),
       metadata: {
         book_id: document.getElementById("book_id").value,
+        last_name: document.getElementById("last-name").value,
+        first_name: document.getElementById("first-name").value,
       },
       // label: "Optional string that replaces customer email"
       onClose: function() {

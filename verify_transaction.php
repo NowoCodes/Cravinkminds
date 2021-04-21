@@ -34,23 +34,27 @@ if ($err) {
 } else {
   // echo $response;
   $result = json_decode($response);
+  // echo $result->data->metadata->first_name;
+  // echo $result->data->customer->first_name;
+  // echo $result->data->amount;
+  // die();
 }
 
 if ($result->data->status == 'success') {
   $status = $result->data->status;
   $reference = $result->data->reference;
   $amount = $result->data->amount;
-  $lname = $result->data->customer->last_name;
-  $fname = $result->data->customer->first_name;
+  $lname = $result->data->metadata->last_name;
+  $fname = $result->data->metadata->first_name;
   $fullname = $lname . ' ' . $fname;
   $customer_email = $result->data->customer->email;
-  $book_id = $result->data->metadata->custom_fields[0]->book_id;
+  $book_id = $result->data->metadata->book_id;
 
   date_default_timezone_set('Africa/Lagos');
-  $date_time = date('m/d/Y hi:s a', time());
+  $date_time = date('d/m/Y h:i:s a', time());
 
-  $query = "INSERT INTO payment (status, reference, fullname, date_purchased, amount, email) 
-          VALUES ('$status', '$reference', '$fullname', '$date_time', '$amount', '$customer_email')";
+  $query = "INSERT INTO payment (status, reference, fullname, date_purchased, amount, email, book_id) 
+          VALUES ('$status', '$reference', '$fullname', '$date_time', '$amount', '$customer_email', '$book_id')";
   $result = mysqli_query($conn, $query);
 
   if (!$result) {
