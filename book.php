@@ -27,7 +27,7 @@ if (!$row) {
   <div class="col-md-3 text-center">
     <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
   </div>
-  <div class="col-md-6">
+  <div class="col-md-9">
     <h4>Book Description</h4>
     <p class="text-justify"><?= $row['book_descr']; ?></p>
     <h4>Book Details</h4>
@@ -41,15 +41,12 @@ if (!$row) {
           <td>Published By</td>
           <td>
             <?php
-            $publisher_result = mysqli_query($conn, $query);
-            while ($parray = mysqli_fetch_assoc($publisher_result)) :
-              $bookId = $parray['id'];
-              $rquery = "SELECT name FROM register WHERE id = '$bookId'";
+              $bookId = $row['u_id'];
+              $rquery = "SELECT * FROM register WHERE id = '$bookId'";
               $cresult = mysqli_query($conn, $rquery);
               $rrow = mysqli_fetch_assoc($cresult);
               echo $rrow['name'];
-            endwhile;
-            ?>
+              ?>
           </td>
         </tr>
         <tr>
