@@ -25,9 +25,7 @@ if (!$row) {
 <p class="lead ml-4 mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
 <div class="row container">
   <div class="col-md-3 text-center">
-    <a href="./img/books/<?= $row['book_image'] ?>" download="image1">
-      <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
-    </a>
+    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
   </div>
   <div class="col-md-6">
     <h4>Book Description</h4>
@@ -36,7 +34,7 @@ if (!$row) {
     <table class="table">
       <tbody>
         <tr>
-          <td>Author <a href="private/purchase.php"> P </a></td>
+          <td>Author</td>
           <td><?= $row['book_author'] ?></td>
         </tr>
         <tr>
@@ -115,21 +113,22 @@ if (!$row) {
 <!-- Page Footer-->
 <?php include 'footer.php'; ?>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
   const paymentForm = document.getElementById('paymentForm');
   paymentForm.addEventListener("submit", payWithPaystack, false);
+
   function payWithPaystack(e) {
     e.preventDefault();
     let handler = PaystackPop.setup({
       key: 'pk_test_21817dec44e03c6736666c8196ecda193d8c9f9e', // Replace with your public key
       email: document.getElementById("email-address").value,
       amount: document.getElementById("amount").value * 100,
-      ref: 'CIM'+Math.floor((Math.random() * 1000000000) + 1),
+      ref: 'CIM' + Math.floor((Math.random() * 1000000000) + 1),
       metadata: {
-        custom_fields: [{
-          book_id: document.getElementById("book_id").value,
-        }]
+        book_id: document.getElementById("book_id").value,
       },
       // label: "Optional string that replaces customer email"
       onClose: function() {
@@ -137,10 +136,10 @@ if (!$row) {
       },
       callback: function(response) {
         let reference = response.reference;
-        // let message = 'Payment complete! Reference: ' + reference;
-        // alert(message);
+        let message = 'Payment complete! Reference: ' + reference;
+        alert(message);
         // window.location = "https://www.cravinkminds.com/verify_transaction.php?reference=" + reference
-        window.location = 'http://localhost/cravinkminds/verify_transaction.php?reference=' + reference;
+        window.location = "http://localhost/cravinkminds/verify_transaction.php?reference=" + reference;
       },
     });
 
