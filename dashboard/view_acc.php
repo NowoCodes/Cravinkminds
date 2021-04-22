@@ -20,7 +20,7 @@ while ($parray = mysqli_fetch_assoc($presult)) :
   while ($row = mysqli_fetch_assoc($cresult)) :
 ?>
 
-<main role="main" class="col-md-qw ml-sm-auto pt-1 px-5 mx-5">
+<main role="main" class="col-md-qw ml-sm-auto pt-1 px-5">
   <div class="flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
     <h1>Bank: <?= $row['bank'] ?></h1><br>
@@ -37,5 +37,5 @@ endwhile;
 
     <a href="viewbooks.php" type="button" class="ml-5 btn btn-sm">Back</a>
 </body>
-
+<?php include '../scripts.php'; ?>
 </html>

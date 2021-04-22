@@ -75,6 +75,7 @@ include 'dashboard-nav.php' ?>
 <script type="text/javascript" src="js/npost.js"></script>
 
 <?php include 'sidebar.php' ?>
+<?php include '../scripts.php'; ?>
 </body>
 
 </html>

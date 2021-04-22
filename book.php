@@ -22,85 +22,87 @@ if (!$row) {
 
 ?>
 
-<p class="lead ml-4 mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
-<div class="row container">
-  <div class="col-md-3 text-center">
-    <img class="ml-3 img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
-  </div>
-  <div class="col-md-9">
-    <h4>Book Description</h4>
-    <p class="text-justify"><?= $row['book_descr']; ?></p>
-    <h4>Book Details</h4>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Author</td>
-          <td><?= $row['book_author'] ?></td>
-        </tr>
-        <tr>
-          <td>Published By</td>
-          <td>
-            <?php
+<div class="container px-5">
+  <p class="lead mt-4"><a href="books.php">Books</a> > <?= $row['book_title']; ?></p>
+  <div class="row">
+    <div class="col-md-3 text-center mb-3">
+      <img class="img-responsive img-thumbnail" src="./img/books/<?= $row['book_image']; ?>">
+    </div>
+    <div class="col-md-9">
+      <h4>Book Description</h4>
+      <p class="text-justify"><?= $row['book_descr']; ?></p>
+      <h4>Book Details</h4>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Author</td>
+            <td><?= $row['book_author'] ?></td>
+          </tr>
+          <tr>
+            <td>Published By</td>
+            <td>
+              <?php
               $bookId = $row['u_id'];
               $rquery = "SELECT * FROM register WHERE id = '$bookId'";
               $cresult = mysqli_query($conn, $rquery);
               $rrow = mysqli_fetch_assoc($cresult);
               echo $rrow['name'];
               ?>
-          </td>
-        </tr>
-        <tr>
-          <td>Publication Date</td>
-          <td><?= pretty_date($row['created_at']); ?></td>
-        </tr>
-        <tr>
-          <td>Previous Price</td>
-          <td><strike class="text-red">$<?= $row['list_price']; ?></strike></td>
-        </tr>
-        <tr>
-          <td>Price</td>
-          <td>$<?= $row['book_price'] ?></td>
-        </tr>
+            </td>
+          </tr>
+          <tr>
+            <td>Publication Date</td>
+            <td><?= pretty_date($row['created_at']); ?></td>
+          </tr>
+          <tr>
+            <td>Previous Price</td>
+            <td><strike class="text-red">N<?= $row['list_price']; ?></strike></td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td>N<?= $row['book_price'] ?></td>
+          </tr>
 
-      </tbody>
-    </table>
-    <?php if (!empty($row['purchase_link'])) : ?>
-      <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
-    <?php else : ?>
+        </tbody>
+      </table>
+      <?php if (!empty($row['purchase_link'])) : ?>
+        <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
+      <?php else : ?>
 
-      <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#pForm">Purchase</button>
+        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#pForm">Purchase</button>
 
-      <div id="pForm" class="collapse">
-        <form id="paymentForm">
-          <!-- <form id="paymentForm" action="pay.php" method="POST"> -->
-          <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email-address" required>
-          </div>
-          <div class="form-group">
-            <!-- <label for="amount">Amount</label> -->
-            <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
-            <input type="hidden" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <div class="form-group">
-                <label for="first-name">First Name</label>
-                <input type="text" class="form-control" id="first-name" />
+        <div id="pForm" class="collapse">
+          <form id="paymentForm">
+            <!-- <form id="paymentForm" action="pay.php" method="POST"> -->
+            <div class="form-group">
+              <label for="email">Email address:</label>
+              <input type="email" class="form-control" id="email-address" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="amount">Amount</label> -->
+              <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
+              <input type="hidden" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <div class="form-group">
+                  <label for="first-name">First Name</label>
+                  <input type="text" class="form-control" id="first-name" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" class="form-control" id="last-name" />
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name" />
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success mb-3" onclick="payWithPaystack()"> Pay </button>
-        </form>
-      </div>
+            <button type="submit" class="btn btn-success mb-3" onclick="payWithPaystack()"> Pay </button>
+          </form>
+        </div>
 
-    <?php endif; ?>
+      <?php endif; ?>
+    </div>
   </div>
 </div>
 
@@ -110,8 +112,6 @@ if (!$row) {
 <!-- Page Footer-->
 <?php include 'footer.php'; ?>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
   const paymentForm = document.getElementById('paymentForm');
