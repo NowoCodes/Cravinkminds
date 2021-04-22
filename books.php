@@ -14,7 +14,7 @@ if (!$result) {
 ?>
 
 <h1 class="container-fluid p-4 text-center text-white " style="background: #053a42;">COMMUNITY BOOKS</h1>
-<div class="container mb-5 mt-3">
+<div class="container mb-5 mt-3 text-center">
 
   <?php for ($i = 0; $i < mysqli_num_rows($result); $i++) : ?>
     <div class="row">
@@ -23,7 +23,9 @@ if (!$result) {
           <a href="book.php?id=<?= $query_row['id']; ?>">
             <img class="img-responsive img-thumbnail" style="height: 300px; width:300px;" src="./img/books/<?= $query_row['book_image']; ?>">
           </a>
-          <p><?= $query_row['book_title']; ?></p>
+          <h5 class="mt-1"><?= $query_row['book_title']; ?></h5>
+          <h6 class="font-weight-bold text-secondary"><?= $query_row['book_author'] ?></h6>
+          <h6 class="font-weight-light">N<?= $query_row['book_price'] ?></h6>
         </div>
       <?php
         $count++;
