@@ -28,13 +28,13 @@ if (isset($_POST['add'])) {
 
   // add image
   if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
-    $image = $_FILES['image']['name'];
+    $image = sanitize($_FILES['image']['name']);
     $target = "../img/books/" . basename($image);
     move_uploaded_file($_FILES['image']['tmp_name'], $target);
   }
 
   if (isset($_FILES['ebook']) && $_FILES['ebook']['name'] != "") {
-    $ebook = $_FILES['ebook']['name'];
+    $ebook = sanitize($_FILES['ebook']['name']);
     $target = "../purchase/books/" . basename($ebook);
     move_uploaded_file($_FILES['ebook']['tmp_name'], $target);
   }
