@@ -43,8 +43,8 @@ if (isset($_POST['add'])) {
   // add image
   if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
     $photo = $_FILES['image'];
-    $name = $photo['name'];
-    $nameArray = explode('.', $name);
+    $image_name = sanitize($photo['name']);
+    $nameArray = explode('.', $image_name);
     $fileName = $nameArray[0];
     $fileExt = $nameArray[1];
     $mime = explode('/', $photo['type']);
@@ -52,7 +52,7 @@ if (isset($_POST['add'])) {
     $mimeExt = $mime[1];
     $fileSize = $photo['size'];
     $allowed = array('png', 'jpg', 'jpeg');
-    $uploadPath = "../img/books/" . basename($name);
+    $uploadPath = "../img/books/" . basename($image_name);
     if ($mimeType != 'image') {
       $errors[] = 'The file must be an image.';
     }
@@ -69,8 +69,8 @@ if (isset($_POST['add'])) {
 
   if (isset($_FILES['ebook']) && $_FILES['ebook']['name'] != "") {
     $book = $_FILES['ebook'];
-    $name = $book['name'];
-    $nameArray = explode('.', $name);
+    $book_name = sanitize($book['name']);
+    $nameArray = explode('.', $book_name);
     $fileName = $nameArray[0];
     $fileExt = $nameArray[1];
     $mime = explode('/', $book['type']);
@@ -78,7 +78,7 @@ if (isset($_POST['add'])) {
     $mimeExt = $mime[1];
     $fileSize = $book['size'];
     $allowed = array('pdf', 'epub');
-    $target = "../purchase/books/" . basename($name);
+    $target = "../purchase/books/" . basename($book_name);
     if (!in_array($fileExt, $allowed)) {
       $errors[] = 'The book must be in pdf or epub format.';
     }
@@ -104,7 +104,7 @@ if (isset($_POST['add'])) {
       move_uploaded_file($_FILES['ebook']['tmp_name'], $target);
     }
     
-    $imageeee = empty($name) ? 'default.jpg' : $name;
+    $imageeee = empty($image_name) ? 'default.jpg' : $image_name;
     $lp = empty($listprice) ? 0 : $listprice;
 
     $a = "SELECT * FROM register WHERE username = '$cravinkuname'";
@@ -113,7 +113,7 @@ if (isset($_POST['add'])) {
     $d = $c['id'];
 
     $query = "INSERT INTO books (u_id, book_title, book_author, book_image, ebook, book_descr, book_price, list_price, purchase_link)
-    VALUES ('$d', '$titlee', '$author', '$imageeee', '$ebook', '$descr', '$price', '$lp', '$purchase_link')";
+    VALUES ('$d', '$titlee', '$author', '$imageeee', '$book_name', '$descr', '$price', '$lp', '$purchase_link')";
 
     $_SESSION['success'] = 'Book has been added';
     $result = mysqli_query($conn, $query);
