@@ -30,6 +30,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css">
     <script type="text/javascript" src='../js/clamp.js'></script>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,10 +42,19 @@
     <script type="text/javascript" src='../js/post.js'></script>
 	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="js/index.js"></script>
 	
   <script src="ckeditor/ckeditor.js"></script>
-	
+
+  <script>
+		window.setTimeout(function () {
+			$(".alert-success").fadeTo(500, 0).slideUp(500, function () {
+				$(this).remove();
+			});
+		}, 5000);
+	</script>
 </head>
 <body>
   
