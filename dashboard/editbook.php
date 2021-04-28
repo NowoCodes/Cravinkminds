@@ -108,9 +108,9 @@ if (isset($_POST['save_change'])) {
     purchase_link = '$link',
     book_price = '$price',
     list_price = '$listprice'";
-    if (isset($image)) {
+    if (isset($image_name)) {
       $query .= ", book_image = '$image_name' WHERE `id` = '$id'";
-    } else if (isset($ebook)) {
+    } else if (isset($book_name)) {
       $query .= ", ebook = '$book_name' WHERE `id` = '$id'";
     } else {
       $query .= " WHERE `id` = '$id'";
@@ -139,6 +139,24 @@ if (!$result) {
   exit;
 }
 $row = mysqli_fetch_assoc($result);
+$saved_image = $row['book_image'] != '' ? $row['book_image'] : '';
+$saved_book = $row['ebook'] != '' ? $row['ebook'] : '';
+
+if (isset($_GET['delete_image'])) {
+  $image_url = $_SERVER['DOCUMENT_ROOT'] . '/cravinkminds/img/books/' . $row['book_image'];
+  unlink($image_url);
+  $query = "UPDATE books SET book_image = '' WHERE id = '$id'";
+  $result = mysqli_query($conn, $query);
+  header('Location: editbook.php?id=' . $id);
+}
+
+if (isset($_GET['delete_book'])) {
+  $book_url = $_SERVER['DOCUMENT_ROOT'] . '/cravinkminds/purchase/books/' . $row['ebook'];
+  unlink($book_url);
+  $query = "UPDATE books SET ebook = '' WHERE id = '$id'";
+  $result = mysqli_query($conn, $query);
+  header('Location: editbook.php?id=' . $id);
+}
 ?>
 
 <div class="container-fluid font-weight-bold">
@@ -151,54 +169,64 @@ $row = mysqli_fetch_assoc($result);
         <input value="<?= $row['id']; ?>" name="id" type="hidden">
         <div class="form-group">
           <label for="title">Title: <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="title" value="<?= $row['book_title']; ?>" required>
+          <input type="text" class="form-control" name="title" value="<?= $row['book_title']; ?>" >
         </div>
         <div class="form-group">
           <label for="author">Author: <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="author" value="<?= $row['book_author']; ?>" required>
+          <input type="text" class="form-control" name="author" value="<?= $row['book_author']; ?>" >
         </div>
         <div class="row">
           <div class="col-md-6 form-group">
             <p>Cover Image: <span class="text-danger">*</span></p>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" name="image" >
-              <label class="custom-file-label" for="customFile"><?= $row['book_image'] ?></label>
-            </div>
+            <?php if ($saved_image != '') : ?>
+              <img src="../img/books/<?= $saved_image; ?>" class=" img-fluid" style="height:300px;" alt="Saved Image">
+              <a href="editbook.php?delete_image=1&id=<?= $row['id']; ?>" class="text-danger card-link">Delete Image</a></a>
+            <?php else : ?>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" required>
+                <label class="custom-file-label" for="customFile">Choose File</label>
+              </div>
+            <?php endif; ?>
           </div>
           <div class="col-md-6 form-group">
-
             <p>Book: <span class="text-danger">*</span></p>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" name="ebook" >
-              <label class="custom-file-label" for="customFile"><?= $row['ebook'] ?></label>
-            </div>
+            <?php if ($saved_book != '') : ?>
+              <p><?= $row['ebook'] ?></p>
+              <a href="editbook.php?delete_book=2&id=<?= $row['id']; ?>" class="text-danger card-link">Delete Book</a></a>
+            <?php else : ?>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="ebook" required>
+                <label class="custom-file-label" for="customFile">Choose File</label>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="descr">Description: <span class="text-danger">*</span></label>
-          <td><textarea name="descr" class="form-control" form-control" rows="5"><?php echo $row['book_descr']; ?></textarea>
-        </div>
-        <div class="form-group">
-          <label for="link">Purchase Link: </label>
-          <input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>">
-        </div>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <label for="price">Price: <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" required>
-          </div>
-          <div class="col-md-6 form-group">
-            <label for="list_price">List Price: </label>
-            <input type="text" class="form-control" name="list_price" value="<?php echo $row['list_price']; ?>">
-          </div>
-        </div>
-        <input type="submit" name="save_change" value="Update" class="btn btn-sm btn-success">
-        <input type="reset" value="cancel" class="btn btn-default btn-sm">
-      </form>
-      <a href="viewbooks.php" type="button" class="btn btn-sm">Back</a>
     </div>
-  </main>
+
+    <div class="form-group">
+      <label for="descr">Description: <span class="text-danger">*</span></label>
+      <td><textarea name="descr" class="form-control" form-control" rows="5"><?php echo $row['book_descr']; ?></textarea>
+    </div>
+    <div class="form-group">
+      <label for="link">Purchase Link: </label>
+      <input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>">
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="price">Price: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" >
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="list_price">List Price: </label>
+        <input type="text" class="form-control" name="list_price" value="<?php echo $row['list_price']; ?>">
+      </div>
+    </div>
+    <input type="submit" name="save_change" value="Update" class="btn btn-sm btn-success">
+    <input type="reset" value="cancel" class="btn btn-default btn-sm">
+    </form>
+    <a href="viewbooks.php" type="button" class="btn btn-sm">Back</a>
+</div>
+</main>
 </div>
 <?php
 if (isset($conn)) {
