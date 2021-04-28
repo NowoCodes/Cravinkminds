@@ -20,6 +20,26 @@ if (!$row) {
   exit;
 }
 
+$reviewquery = "SELECT * FROM reviews WHERE book_id = '$id' ORDER BY submit_date DESC";
+$reviewresult = mysqli_query($conn, $reviewquery);
+$overall = mysqli_fetch_assoc($reviewresult);
+
+$averagequery = "SELECT AVG(rating) AS overall_rating, COUNT(*) AS total_reviews FROM reviews WHERE book_id = '$id'";
+$averageresult = mysqli_query($conn, $averagequery);
+$average = mysqli_fetch_assoc($averageresult);
+
+if (isset($_POST['review'])) {
+  $name = $_POST['name'];
+  $content = $_POST['content'];
+  $rating = $_POST['rating'];
+
+  $query = "INSERT INTO reviews (book_id, name, content, rating, submit_date)
+              VALUES ('$id', '$name', '$content', '$rating', NOW())";
+  $result = mysqli_query($conn, $query);
+
+  header('Location: book.php?id=' . $id);
+}
+
 ?>
 
 <div class="container px-5">
@@ -69,44 +89,92 @@ if (!$row) {
         <a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
       <?php else : ?>
 
-        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#pForm">Purchase</button>
+        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#payForm">Purchase</button>
 
-        <div id="pForm" class="collapse">
-          <form id="paymentForm">
-            <!-- <form id="paymentForm" action="pay.php" method="POST"> -->
-            <div class="form-group">
-              <label for="email">Email address:</label>
-              <input type="email" class="form-control" id="email-address" required>
-            </div>
-            <div class="form-group">
-              <!-- <label for="amount">Amount</label> -->
-              <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
-              <input type="hidden" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
-            </div>
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <div class="form-group">
-                  <label for="first-name">First Name</label>
-                  <input type="text" class="form-control" id="first-name" />
-                </div>
+        <!-- The Modal -->
+        <div class="modal fade" id="payForm">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Make Payment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="last-name">Last Name</label>
-                  <input type="text" class="form-control" id="last-name" />
-                </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form id="paymentForm">
+                  <!-- <form id="paymentForm" action="pay.php" method="POST"> -->
+                  <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email-address" required>
+                  </div>
+                  <div class="form-group">
+                    <!-- <label for="amount">Amount</label> -->
+                    <input type="hidden" id="book_id" value="<?= $row['id']; ?>">
+                    <input type="hidden" class="form-control" id="amount" value="<?= $row['book_price']; ?>" required />
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" class="form-control" id="first-name" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" class="form-control" id="last-name" />
+                      </div>
+                    </div>
+                  </div>
               </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="payWithPaystack()"> Pay </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+
+              </form>
             </div>
-            <button type="submit" class="btn btn-success mb-3" onclick="payWithPaystack()"> Pay </button>
-          </form>
+          </div>
         </div>
 
       <?php endif; ?>
+
+      <hr>
+
+      <div class="mt-3">
+        <div class="overall_rating">
+          <span class="num"><?= number_format($average['overall_rating'], 1) ?></span>
+          <span class="stars"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></span>
+          <span class="total"><?= $average['total_reviews'] ?> reviews</span>
+        </div>
+        <a href="#" class="write_review_btn">Write Review</a>
+        <div class="write_review">
+          <form action="book.php?id=<?= $row['id']; ?>" method="POST">
+            <input name="name" type="text" placeholder="Your Name" required>
+            <input name="rating" type="number" min="1" max="5" placeholder="Rating (1-5)" required>
+            <textarea name="content" placeholder="Write your review here..." required></textarea>
+            <button type="submit" name="review">Submit Review</button>
+          </form>
+        </div>
+        <?php foreach ($reviewresult as $review) : ?>
+          <div class="review">
+            <h3 class="name"><?= htmlspecialchars($review['name'], ENT_QUOTES) ?></h3>
+            <div>
+              <span class="rating"><?= str_repeat('&#9733;', $review['rating']) ?></span>
+              <span class="date"><?= time_elapsed_string($review['submit_date']) ?></span>
+            </div>
+            <p class="content"><?= htmlspecialchars($review['content'], ENT_QUOTES) ?></p>
+          </div>
+        <?php endforeach ?>
+      </div>
+
     </div>
   </div>
-</div>
-
-
 </div>
 
 <!-- Page Footer-->
