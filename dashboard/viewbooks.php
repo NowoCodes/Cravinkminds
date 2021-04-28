@@ -51,7 +51,7 @@ include 'dashboard-nav.php' ?>
               <tr>
                 <td><?= $row['book_title']; ?></td>
                 <td><?= $row['book_author']; ?></td>
-                <td><?= $row['book_image']; ?></td>
+                <td><img src="../img/books/<?= $row['book_image']; ?>" width="100" alt="Cover Image"></td>
                 <td class="text-justify"><?= $row['book_descr']; ?></td>
                 <td class="text-break">
                   <a class="text-warning text-decoration-none" target="_blank" href="<?= $row['purchase_link']; ?>"><?= $row['purchase_link']; ?></a>
