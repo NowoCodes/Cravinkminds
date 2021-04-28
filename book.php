@@ -55,7 +55,7 @@ if (!$row) {
             <td><?= pretty_date($row['created_at']); ?></td>
           </tr>
           <tr>
-            <td>Previous Price</td>
+            <td>Old Price</td>
             <td><strike class="text-red">N<?= $row['list_price']; ?></strike></td>
           </tr>
           <tr>
