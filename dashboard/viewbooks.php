@@ -30,7 +30,7 @@ include 'dashboard-nav.php' ?>
             <th>Description</th>
             <th>Purchase Link</th>
             <th>Price</th>
-            <th>List Price</th>
+            <th>Old Price</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -51,13 +51,19 @@ include 'dashboard-nav.php' ?>
               <tr>
                 <td><?= $row['book_title']; ?></td>
                 <td><?= $row['book_author']; ?></td>
-                <td><?= $row['book_image']; ?></td>
+                <td><img src="../img/books/<?= $row['book_image']; ?>" width="100" alt="Cover Image"></td>
                 <td class="text-justify"><?= $row['book_descr']; ?></td>
                 <td class="text-break">
                   <a class="text-warning text-decoration-none" target="_blank" href="<?= $row['purchase_link']; ?>"><?= $row['purchase_link']; ?></a>
                 </td>
                 <td><?= $row['book_price']; ?></td>
-                <td><strike class="text-danger"><?= $row['list_price']; ?></strike></td>
+                <td>
+                  <?php if ($row['list_price'] != 0) : ?>
+                    <strike class="text-danger"><?= $row['list_price']; ?></strike>
+                  <?php elseif ($row['list_price'] == 0) : ?>
+                    <span class="text-danger"><?= $row['list_price']; ?></span>
+                  <?php endif; ?>
+                </td>
                 <td>
                   <a class="btn btn-sm btn-info" href="editbook.php?id=<?= $row['id']; ?>">Edit</a>
                   <a class="btn btn-sm btn-danger" href="deletebook.php?id=<?= $row['id']; ?>">Delete</a>

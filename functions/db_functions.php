@@ -67,3 +67,12 @@ function pretty_date($date) {
   date_default_timezone_set("Africa/Lagos");
   return date("M d, Y h:i A", strtotime($date));
 }
+
+function display_errors($errors){
+  $display = '<ul class="container-fluid mx-5 list-unstyled ">';
+  foreach ($errors as $error){
+      $display .= '<li class="text-danger">'.$error.'</li>';
+  }
+  $display .= '</ul>';
+  return $display;
+}

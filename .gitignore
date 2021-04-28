@@ -1,3 +1,5 @@
 
 *.jpg
 *.png
+purchase/books/.DS_Store
+*.pdf
