@@ -149,9 +149,10 @@ if (isset($_POST['review'])) {
       <div class="mt-3">
         <div class="overall_rating">
           <span class="num"><?= number_format($average['overall_rating'], 1) ?></span>
-          <span class="stars"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></span>
+          <span class="stars text-warning"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></span>
           <span class="total"><?= $average['total_reviews'] ?> reviews</span>
         </div>
+
         <a href="#" class="write_review_btn">Write Review</a>
         <div class="write_review">
           <form action="book.php?id=<?= $row['id']; ?>" method="POST">
@@ -161,16 +162,21 @@ if (isset($_POST['review'])) {
             <button type="submit" name="review">Submit Review</button>
           </form>
         </div>
-        <?php foreach ($reviewresult as $review) : ?>
-          <div class="review">
-            <h3 class="name"><?= htmlspecialchars($review['name'], ENT_QUOTES) ?></h3>
-            <div>
-              <span class="rating"><?= str_repeat('&#9733;', $review['rating']) ?></span>
-              <span class="date"><?= time_elapsed_string($review['submit_date']) ?></span>
+
+        <div class="row">
+          <?php foreach ($reviewresult as $review) : ?>
+            <div class="col-6">
+              <div class="review">
+                <h3 class="name"><?= htmlspecialchars($review['name'], ENT_QUOTES) ?></h3>
+                <div>
+                  <span class="rating text-warning"><?= str_repeat('&#9733;', $review['rating']) ?></span>
+                  <span class="date"><sub><?= time_elapsed_string($review['submit_date']) ?></sub></span>
+                </div>
+                <p class="content"><?= htmlspecialchars($review['content'], ENT_QUOTES) ?></p>
+              </div>
             </div>
-            <p class="content"><?= htmlspecialchars($review['content'], ENT_QUOTES) ?></p>
-          </div>
-        <?php endforeach ?>
+          <?php endforeach ?>
+        </div>
       </div>
 
     </div>
