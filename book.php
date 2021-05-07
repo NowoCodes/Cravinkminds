@@ -59,7 +59,7 @@ if (isset($_POST['review'])) {
 						<td><?= $row['book_author'] ?></td>
 					</tr>
 					<tr>
-						<td>Upload By</td>
+						<td>Uploaded By</td>
 						<td>
 							<?php
 							$bookId = $row['u_id'];
