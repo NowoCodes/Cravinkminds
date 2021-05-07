@@ -59,7 +59,7 @@ if (isset($_POST['review'])) {
 						<td><?= $row['book_author'] ?></td>
 					</tr>
 					<tr>
-						<td>Published By</td>
+						<td>Upload By</td>
 						<td>
 							<?php
 							$bookId = $row['u_id'];
@@ -79,7 +79,7 @@ if (isset($_POST['review'])) {
 						</td>
 					</tr>
 					<tr>
-						<td>Publication Date</td>
+						<td>Upload Date</td>
 						<td><?= pretty_date($row['created_at']); ?></td>
 					</tr>
 					<tr>
@@ -87,8 +87,8 @@ if (isset($_POST['review'])) {
 						<td><strike class="text-red">N<?= $row['list_price']; ?></strike></td>
 					</tr>
 					<tr>
-						<td>Price</td>
-						<td>N<?= $row['book_price'] ?></td>
+						<td>New Price</td>
+						<td>&#8358;<?= $row['book_price'] ?></td>
 					</tr>
 				</tbody>
 			</table>
