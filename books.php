@@ -25,14 +25,14 @@ if (!$result) {
         $averageresult = mysqli_query($conn, $averagequery);
         $average = mysqli_fetch_assoc($averageresult);
       ?>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4 col-6">
           <a href="book.php?id=<?= $query_row['id']; ?>">
             <img class="img-responsive img-thumbnail" style="height: 300px; width:300px;" src="./img/books/<?= $query_row['book_image']; ?>">
           </a>
           <h5 class="mt-1"><?= $query_row['book_title']; ?></h5>
           <h6 class="font-weight-bold text-secondary"><?= $query_row['book_author'] ?></h6>
-          <span class="mb-1 font-size-16" style="color: teal;"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></span>
-          <h6 class="font-weight-light">N<?= $query_row['book_price'] ?></h6>
+          <p class="mt-n2 font-size-16" style="color: teal;"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></p>
+          <h6 class="mt-n3 font-weight-light">N<?= $query_row['book_price'] ?></h6>
         </div>
       <?php
         $count++;
