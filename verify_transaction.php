@@ -61,7 +61,7 @@ if ($result->data->status == 'success') {
     echo "Can't add new data " . mysqli_error($conn);
     exit;
   } else {
-    header("Location: purchase/purchase.php?book_id=$book_id&status=success");
+    header("Location: purchase/purchase.php?status=success&book_id=$book_id");
     exit;
   }
 } else {
