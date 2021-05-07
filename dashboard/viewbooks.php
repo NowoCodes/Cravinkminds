@@ -56,12 +56,12 @@ include 'dashboard-nav.php' ?>
                 <td class="text-break">
                   <a class="text-warning text-decoration-none" target="_blank" href="<?= $row['purchase_link']; ?>"><?= $row['purchase_link']; ?></a>
                 </td>
-                <td><?= $row['book_price']; ?></td>
+                <td>&#8358;<?= $row['book_price']; ?></td>
                 <td>
                   <?php if ($row['list_price'] != 0) : ?>
-                    <strike class="text-danger"><?= $row['list_price']; ?></strike>
+                    <strike class="text-danger">&#8358;<?= $row['list_price']; ?></strike>
                   <?php elseif ($row['list_price'] == 0) : ?>
-                    <span class="text-danger"><?= $row['list_price']; ?></span>
+                    <span class="text-danger">&#8358;<?= $row['list_price']; ?></span>
                   <?php endif; ?>
                 </td>
                 <td>

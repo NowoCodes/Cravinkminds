@@ -168,11 +168,11 @@ if (isset($_POST['add'])) {
         </div>
         <div class="row">
           <div class="col-md-6 form-group">
-            <label for="price">Price: <span class="text-danger">*</span></label>
+            <label for="price">Price(&#8358;): <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="price" value="<?= $price ?>" >
           </div>
           <div class="col-md-6 form-group">
-            <label for="list_price">Previous Price: </label>
+            <label for="list_price">Old Price(&#8358;): </label>
             <input type="text" class="form-control" name="list_price" value="<?= $listprice; ?>">
           </div>
         </div>

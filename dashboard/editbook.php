@@ -213,11 +213,11 @@ if (isset($_GET['delete_book'])) {
     </div>
     <div class="row">
       <div class="col-md-6 form-group">
-        <label for="price">Price: <span class="text-danger">*</span></label>
+        <label for="price">Price(&#8358;): <span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" >
       </div>
       <div class="col-md-6 form-group">
-        <label for="list_price">List Price: </label>
+        <label for="list_price">Old Price(&#8358;): </label>
         <input type="text" class="form-control" name="list_price" value="<?php echo $row['list_price']; ?>">
       </div>
     </div>
