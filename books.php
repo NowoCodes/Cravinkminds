@@ -32,7 +32,7 @@ if (!$result) {
           <h5 class="mt-1"><?= $query_row['book_title']; ?></h5>
           <h6 class="font-weight-bold text-secondary"><?= $query_row['book_author'] ?></h6>
           <p class="mt-n2 font-size-16" style="color: teal;"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></p>
-          <h6 class="mt-n3 font-weight-light"><?= $query_row['book_price'] ?></h6>
+          <h6 class="mt-n3 font-weight-light">&#8358;<?= $query_row['book_price'] ?></h6>
         </div>
       <?php
         $count++;
