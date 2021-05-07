@@ -84,7 +84,7 @@ if (isset($_POST['review'])) {
 					</tr>
 					<tr>
 						<td>Old Price</td>
-						<td><strike class="text-red">N<?= $row['list_price']; ?></strike></td>
+						<td><strike class="text-red">&#8358;<?= $row['list_price']; ?></strike></td>
 					</tr>
 					<tr>
 						<td>New Price</td>
@@ -94,23 +94,23 @@ if (isset($_POST['review'])) {
 			</table>
 			<div class="mb-4 container">
 				<div class="row">
-				<span class="col-2 text-center">
+					<span class="col-2 text-center">
 						<p class="fa-3x">&#128196;</p>
 						<p class="mt-n4 font-weight-bold fa-2x"><?= $pagenumber; ?></p>
 						<p class="mt-n4">
-						<?= ($pagenumber == 1) ? 'Page' : 'Pages'; ?>
+							<?= ($pagenumber == 1) ? 'Page' : 'Pages'; ?>
 						</p>
-				</span>
-				<span class="col-6 text-center">
+					</span>
+					<span class="col-6 text-center">
 						<p class="fa-3x">&#x1F551;</p>
 						<p class="mt-n4 font-weight-bold fa-2x"><?= $rounded - 1 . ' - ' . $rounded; ?></p>
 						<p class="mt-n4">Minutes read</p>
-				</span>
-				<span class="col-2 text-center">
+					</span>
+					<span class="col-2 text-center">
 						<p class="fa-3x">&#128214;</p>
 						<p class="mt-n4 font-weight-bold fa-2x"><?= $totalwords; ?></p>
 						<p class="mt-n4">Words</p>
-				</span>
+					</span>
 				</div>
 			</div>
 
@@ -127,9 +127,9 @@ if (isset($_POST['review'])) {
 
 			<div class="mt-3">
 				<div class="overall_rating">
-					<span class="fa-2x"><?= number_format($average['overall_rating'], 1) ?></span>
+					<span class="fa-2x"><?= $average['overall_rating'] == 0 ? '' : number_format($average['overall_rating'], 1); ?></span>
 					<span class="fa-2x" style="color: teal;"><?= str_repeat('&#9733;', round($average['overall_rating'])) ?></span>
-					<span class="fa-2x"><?= $average['total_reviews'] ?> reviews</span>
+					<span class="fa-2x"><?= $average['total_reviews'] == 1  ? $average['total_reviews'] . ' review' : $average['total_reviews'] . ' reviews'; ?></span>
 				</div>
 
 				<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#ratings">Write Review</button>
@@ -141,7 +141,7 @@ if (isset($_POST['review'])) {
 						<div class="col-6">
 							<div class="review">
 								<h3 class="name"><?= htmlspecialchars($review['name'], ENT_QUOTES) ?></h3>
-								<div>
+								<div class="mt-n3">
 									<span class="fa-2x" style="color: teal;"><?= str_repeat('&#9733;', $review['rating']) ?></span>
 									<span class="date"><sub><?= time_elapsed_string($review['submit_date']) ?></sub></span>
 								</div>
