@@ -25,7 +25,7 @@ if (!$result) {
         $averageresult = mysqli_query($conn, $averagequery);
         $average = mysqli_fetch_assoc($averageresult);
       ?>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 text-center">
           <a href="book.php?id=<?= $query_row['id']; ?>">
             <img class="img-responsive img-thumbnail" style="height: 300px; width:300px;" src="./img/books/<?= $query_row['book_image']; ?>">
           </a>
