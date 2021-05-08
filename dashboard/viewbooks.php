@@ -10,6 +10,18 @@ if (isset($_SESSION['cravinkuname'])) {
   header("Location:../login.php");
 }
 
+$sam="SELECT * FROM register where username='$cravinkuname'";
+        $rsam=mysqli_query($conn,$sam);
+        $gsam=mysqli_fetch_assoc($rsam);
+
+        $primg=$gsam['primg'];
+        $name=$gsam['name'];
+        $uname=$gsam['username'];
+        $email=$gsam['email'];
+        $address=$gsam['address'];
+        $phone=$gsam['phone'];
+        $country=$gsam['country'];
+
 include 'dashboard-nav.php' ?>
 
 
