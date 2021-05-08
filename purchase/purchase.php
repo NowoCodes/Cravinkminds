@@ -64,7 +64,7 @@ $result = mysqli_fetch_assoc(mysqli_query($conn, $query));
     </div>
 
     <h1 class="text-center py-5">Download Book</h1>
-    <div class="row">
+    <div class="row mb-5 pb-5">
       <div class="col-12 col-md-6 mb-5">
         <img class="img-fluid" src="../img/books/<?= $result['book_image']; ?>" height="500" width="500" alt="Book Image">
       </div>
