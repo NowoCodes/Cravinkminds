@@ -44,6 +44,10 @@ if (isset($_POST['add'])) {
     $errors[] = 'Either upload a book or a link. Both cannot be empty.';
   }
 
+  if ($p_link != '' && $_FILES['ebook']['name'] != "") {
+    $errors[] = 'You can\'t upload a book and a link.';
+  }
+
   // add image
   if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
     $photo = $_FILES['image'];
