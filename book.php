@@ -116,7 +116,7 @@ if (isset($_POST['review'])) {
 
 
 			<?php if (!empty($row['purchase_link'])) : ?>
-				<a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none"> Purchase </a>
+				<a role="button" target="_blank" href="<?= $row['purchase_link']; ?>" class="btn btn-success mb-4 text-decoration-none text-white"> Purchase </a>
 			<?php else : ?>
 
 				<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#payForm">Purchase</button>
