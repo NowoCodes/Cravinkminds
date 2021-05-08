@@ -31,6 +31,10 @@ if (isset($_POST['save_change'])) {
     }
   }
 
+  if ($link == '' && $_FILES['ebook']['name'] == "") {
+    $errors[] = 'Either upload a book or a link. Both cannot be empty.';
+  }
+
   // add image
   if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
     $photo = $_FILES['image'];
@@ -183,19 +187,19 @@ if (isset($_GET['delete_book'])) {
               <a href="editbook.php?delete_image=1&id=<?= $row['id']; ?>" class="text-danger card-link">Delete Image</a></a>
             <?php else : ?>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" name="image" required>
+                <input type="file" class="custom-file-input" name="image">
                 <label class="custom-file-label" for="customFile">Choose File</label>
               </div>
             <?php endif; ?>
           </div>
           <div class="col-md-6 form-group">
-            <p>Book: <span class="text-danger">*</span></p>
+            <p>Book(Optional if posting a link): <span class="text-danger">*</span></p>
             <?php if ($saved_book != '') : ?>
               <p><?= $row['ebook'] ?></p>
               <a href="editbook.php?delete_book=2&id=<?= $row['id']; ?>" class="text-danger card-link">Delete Book</a></a>
             <?php else : ?>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" name="ebook" required>
+                <input type="file" class="custom-file-input" name="ebook">
                 <label class="custom-file-label" for="customFile">Choose File</label>
               </div>
             <?php endif; ?>
