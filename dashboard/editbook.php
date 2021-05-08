@@ -208,7 +208,7 @@ if (isset($_GET['delete_book'])) {
       <td><textarea name="descr" class="form-control" form-control" rows="5"><?php echo $row['book_descr']; ?></textarea>
     </div>
     <div class="form-group">
-      <label for="link">Purchase Link: </label>
+      <label for="link">Purchase Link(Optional): </label>
       <input type="text" class="form-control" name="link" value="<?php echo $row['purchase_link']; ?>">
     </div>
     <div class="row">
@@ -217,7 +217,7 @@ if (isset($_GET['delete_book'])) {
         <input type="text" class="form-control" name="price" value="<?php echo $row['book_price']; ?>" >
       </div>
       <div class="col-md-6 form-group">
-        <label for="list_price">Old Price(&#8358;): </label>
+        <label for="list_price">Old Price(&#8358;)(Optional): </label>
         <input type="text" class="form-control" name="list_price" value="<?php echo $row['list_price']; ?>">
       </div>
     </div>

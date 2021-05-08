@@ -163,7 +163,7 @@ if (isset($_POST['add'])) {
           <textarea name="descr" class="form-control" form-control" rows="5"><?= $descr; ?></textarea>
         </div>
         <div class="form-group">
-          <label for="link">Purchase Link: </label>
+          <label for="link">Purchase Link(Optional): </label>
           <input type="text" class="form-control" name="purchase_link" value="<?= $p_link; ?>">
         </div>
         <div class="row">
@@ -172,7 +172,7 @@ if (isset($_POST['add'])) {
             <input type="text" class="form-control" name="price" value="<?= $price ?>" >
           </div>
           <div class="col-md-6 form-group">
-            <label for="list_price">Old Price(&#8358;): </label>
+            <label for="list_price">Old Price(&#8358;)(Optional): </label>
             <input type="text" class="form-control" name="list_price" value="<?= $listprice; ?>">
           </div>
         </div>
